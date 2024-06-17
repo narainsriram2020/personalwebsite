@@ -56,29 +56,31 @@ function Projects() {
     ];
 
     const GitHubButton = styled.a`
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 20px; /* Increased margin */
-        padding: 12px 24px; /* Increased padding */
-        font-size: 18px; /* Increased font size */
-        color: #555;
-        background-color: #fff;
-        border: 2px solid #555;
-        border-radius: 5px;
-        text-decoration: none; /* Remove underline from anchor */
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for the hover effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px; /* Increased margin */
+    padding: 12px 24px; /* Increased padding */
+    font-size: 18px; /* Increased font size */
+    color: #555;
+    background-color: #fff;
+    border: 2px solid #555;
+    border-radius: 5px;
+    text-decoration: none; /* Remove underline from anchor */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for the hover effect */
 
-        &:hover {
-            transform: scale(1.05); /* Scale up the button on hover */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover for highlighting effect */
-        }
+    &:hover {
+        transform: scale(1.05); /* Scale up the button on hover */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover for highlighting effect */
+    }
 
-        @media (max-width: 600px) {
-        width: 100%; /* Adjusted width for smaller screens */
+    @media (max-width: 600px) {
+        width: calc(100% - 48px); /* Adjusted width for smaller screens */
         max-width: 300px; /* Added max-width to prevent overflow */
-        }
-    `;
+        margin-left: auto; /* Align to the right on mobile */
+        margin-right: auto; /* Align to the left on mobile */
+    }
+`;
 
     const YouTubeButton = styled.a`
         display: flex;
