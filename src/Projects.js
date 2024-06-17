@@ -237,44 +237,4 @@ const ProjectSectionTitle = styled.h4`
     text-align: left;
 `;
 
-const GitHubButton = styled.a`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px; /* Increased margin */
-    padding: 12px 24px; /* Increased padding */
-    font-size: 18px; /* Increased font size */
-    color: #555;
-    background-color: #fff;
-    border: 2px solid #555;
-    border-radius: 5px;
-    text-decoration: none; /* Remove underline from anchor */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for the hover effect */
-
-    &:hover {
-        transform: scale(1.05); /* Scale up the button on hover */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover for highlighting effect */
-    }
-`;
-
-const YouTubeButton = styled.a`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px; /* Increased margin */
-    padding: 12px 24px; /* Increased padding */
-    font-size: 18px; /* Increased font size */
-    color: #555;
-    background-color: #fff;
-    border: 2px solid #555;
-    border-radius: 5px;
-    text-decoration: none; /* Remove underline from anchor */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for the hover effect */
-
-    &:hover {
-        transform: scale(1.05); /* Scale up the button on hover */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover for highlighting effect */
-    }
-`;
-
 export default Projects;

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 function Skills() {
-    //const [indexHovered, setIndexHovered] = useState(null); // State to track the hovered index
     const skillsList = [
         {
             name: 'Python',

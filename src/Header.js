@@ -7,11 +7,11 @@ function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
     let lastScrollPosition = window.scrollY;
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      //const isScrollingUp = scrollPosition < lastScrollPosition;
 
       const sections = ['home', 'skills', 'experience', 'projects', 'education', 'volunteering', 'contact'];
 
