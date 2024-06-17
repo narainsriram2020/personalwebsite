@@ -33,7 +33,7 @@ function Projects() {
             name: 'Personal Website',
             overview: 'My personal website serves as a digital reflection of who I am professionally. It\'s a virtual space where I compile and showcase my skills, past projects, diverse experiences, volunteer engagements, and educational background.Essentially, it encapsulates all the essential aspects of my professional journey, offering visitors a comprehensive insight into my capabilities and accomplishments.',
             techDetails: 'In crafting this website, I opted for React.js, a powerful JavaScript library renowned for its ability to create dynamic and interactive user interfaces. With React.js, I could design a website that presents information and engages visitors with seamless navigation and visually appealing design elements. Its flexibility allowed me to develop reusable components, ensuring consistency and efficiency across the website. Moreover, React.js facilitated easy updates, enabling me to keep the website current and reflective of my latest endeavors.',
-            githubLink: 'https://github.com/narainsriram2020/PersonalWebsite',
+            githubLink: 'https://github.com/narainsriram2020/personalwebsite/tree/master',
         },
         {
             name: 'Weather App',
@@ -73,6 +73,11 @@ function Projects() {
             transform: scale(1.05); /* Scale up the button on hover */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover for highlighting effect */
         }
+
+        @media (max-width: 600px) {
+        width: 100%; /* Adjusted width for smaller screens */
+        max-width: 300px; /* Added max-width to prevent overflow */
+        }
     `;
 
     const YouTubeButton = styled.a`
@@ -92,6 +97,11 @@ function Projects() {
         &:hover {
             transform: scale(1.05); /* Scale up the button on hover */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover for highlighting effect */
+        }
+
+        @media (max-width: 600px) {
+        width: 100%; /* Adjusted width for smaller screens */
+        max-width: 300px; /* Added max-width to prevent overflow */
         }
     `;
 
@@ -143,7 +153,15 @@ function Projects() {
                                 </GitHubButton>
                             </div>
                         )}
-                        {project.name !== 'wAIste' && (
+                        {project.name === 'Cisco Hackathon' && (
+                            <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
+                                <YouTubeButton href={project.youtubeLink} target="_blank" style={{ width: '100%' }}>
+                                    <YouTubeIcon />
+                                    View on YouTube
+                                </YouTubeButton>
+                            </div>
+                        )}
+                        {project.name !== 'wAIste' && project.name !== 'Cisco Hackathon' && (
                             <GitHubButton href={project.githubLink} target="_blank">
                                 <GitHubIcon />
                                 View on GitHub
