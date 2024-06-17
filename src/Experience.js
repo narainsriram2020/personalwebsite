@@ -194,7 +194,8 @@ const experiences = [
         date: 'July 2022 - September 2022',
         description: [
             'Led initiatives for the annual event coordination, and devised marketing strategies for two locations with 250 students',
-            'Spearheaded marketing and outreach efforts for two Eye Level locations, driving student enrollment and brand visibility'
+            'Spearheaded marketing and outreach efforts for two Eye Level locations, driving student enrollment and brand visibility',
+            'Developed and implemented intricate marketing strategies, achieving significant results',
         ],
     },
     {
