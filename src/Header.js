@@ -11,7 +11,7 @@ function Header() {
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const isScrollingUp = scrollPosition < lastScrollPosition;
+      //const isScrollingUp = scrollPosition < lastScrollPosition;
 
       const sections = ['home', 'skills', 'experience', 'projects', 'education', 'volunteering', 'contact'];
 

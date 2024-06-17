@@ -277,22 +277,4 @@ const YouTubeButton = styled.a`
     }
 `;
 
-const GitHubIcon = styled(FaGithub)`
-    margin-right: 10px; /* Increased margin */
-    transition: transform 0.3s ease; /* Add transition for the rotation effect */
-
-    ${GitHubButton}:hover & {
-        transform: rotate(360deg); /* Rotate the icon 360 degrees on hover */
-    }
-`;
-
-const YouTubeIcon = styled(FaYoutube)`
-    margin-right: 10px; /* Increased margin */
-    transition: transform 0.3s ease; /* Add transition for the rotation effect */
-
-    ${YouTubeButton}:hover & {
-        transform: rotate(360deg); /* Rotate the icon 360 degrees on hover */
-    }
-`;
-
 export default Projects;
