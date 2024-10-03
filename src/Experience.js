@@ -1,7 +1,7 @@
 import React from 'react';
 import ciscoLogo from './experienceimages/cisco.png';
 import elLogo from './experienceimages/el2.png';
-import blLogo from './experienceimages/pickleball.png';
+import pickleballLogo from './experienceimages/pickleball.png';
 import rpr from './experienceimages/randolphpr.jpeg';
 import pythonIcon from './experienceimages/py.png';
 import tennisBallIcon from './experienceimages/tennis.png';
@@ -221,7 +221,7 @@ const experiences = [
     },
     {
         company: 'NJ United Pickleball Academy',
-        logo: blLogo,
+        logo: pickleballLogo,
         title: 'Pickleball Coach and Program Coordinator ',
         date: 'June 2024 - August 2024',
         description: [
