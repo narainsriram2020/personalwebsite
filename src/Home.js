@@ -10,7 +10,7 @@ function Home() {
         </ImageContainer>
         <AnimatedText>
           <Heading>🙋‍♂️ Hello, I'm Narain!</Heading>
-          <SubHeading>Rising Sophomore at the University of Maryland, pursuing a major in Computer Science</SubHeading>
+          <SubHeading>Sophomore at the University of Maryland, pursuing a major in Computer Science</SubHeading>
         </AnimatedText>
       </Content>
       <SVGContainer>

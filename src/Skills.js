@@ -21,14 +21,14 @@ function Skills() {
             name: 'JavaScript',
             logo: '/js.png',
             description: 'High-level, dynamic programming language for web development',
-            proficiency: 'Advanced',
+            proficiency: 'Expert',
             used: 'Extensively used for web development, including building websites and interactive applications.'
         },
         {
             name: 'React JS & React Native',
             logo: '/rn.png',
             description: 'Framework for building cross-platform mobile applications',
-            proficiency: 'Advanced',
+            proficiency: 'Expert',
             used: 'Developed multiple mobile apps and a website, showcasing skills in creating responsive user interfaces.'
         },
         {
@@ -56,14 +56,14 @@ function Skills() {
             name: 'NumPy',
             logo: '/numpy.webp',
             description: 'Python library for scientific computing',
-            proficiency: 'Expert',
+            proficiency: 'Advanced',
             used: 'Employed for numerical computing in a house price data analysis project.'
         },
         {
             name: 'Pandas',
             logo: '/pandas.png',
             description: 'Python library for data manipulation and analysis',
-            proficiency: 'Expert',
+            proficiency: 'Advanced',
             used: 'Used alongside NumPy for data manipulation and analysis in a house price project.'
         },
         {
@@ -98,14 +98,14 @@ function Skills() {
             name: 'Python Django',
             logo: '/django.png',
             description: 'Python framework for building secure web applications.',
-            proficiency: 'Beginner',
+            proficiency: 'Intermediate',
             used: 'Leveraging Django for scalable web application development in my Rebel Internship.'
         },
         {
             name: 'Google Cloud Platform',
             logo: '/gc.png',
             description: 'Google\'s comprehensive cloud computing platform for various services.',
-            proficiency: 'Beginner',
+            proficiency: 'Intermediate',
             used: 'Utilizing Google Cloud Platform for backend development in my Rebel Internship, including App Engine and Cloud SQL.'
         },
         {
@@ -119,14 +119,14 @@ function Skills() {
             name: 'Flask Server',
             logo: '/flask.png',
             description: 'Python web framework for building web applications and APIs.',
-            proficiency: 'Advanced',
+            proficiency: 'Intermediate',
             used: 'Used Flask for backend development in the wAIste project, implementing RESTful APIs.'
         },
         {
             name: 'Rest API',
             logo: '/Restapi.webp',
             description: 'Architectural style for building web services and data exchange.',
-            proficiency: 'Advanced',
+            proficiency: 'Intermediate',
             used: 'Implemented a RESTful API for the wAIste project\'s backend'
         },
         {

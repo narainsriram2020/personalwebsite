@@ -1,10 +1,10 @@
 import React from 'react';
 import ciscoLogo from './experienceimages/cisco.png';
 import elLogo from './experienceimages/el2.png';
-import blLogo from './experienceimages/bl.jpeg';
+import blLogo from './experienceimages/pickleball.png';
 import rpr from './experienceimages/randolphpr.jpeg';
 import pythonIcon from './experienceimages/py.png';
-import tennisBallIcon from './experienceimages/tbicon.jpeg';
+import tennisBallIcon from './experienceimages/tennis.png';
 import rebel2 from './experienceimages/rebel2.jpeg';
 import gitIcon from './experienceimages/git copy.png';
 import swiftIcon from './experienceimages/swift1.png';
@@ -13,6 +13,8 @@ import djangoIcon from './experienceimages/dj.png';
 import rnIcon from './experienceimages/rn.png';
 import SQLIcon from './experienceimages/sql.png';
 import gcIcon from './experienceimages/gc.png';
+import businessIcon from './experienceimages/business.png';
+import chapone from './experienceimages/chapone.png';
 
 function Experience() {
     return (
@@ -33,6 +35,7 @@ function Experience() {
                         </div>
                         <div style={content}>
                             <h3 style={jobTitle}>{experience.title}</h3>
+                            <h4 style={companyNameStyle}>{experience.company}</h4>
                             <p style={jobDate}>{experience.date}</p>
                             <ul style={jobDescription}>
                                 {experience.description.map((point, idx) => (
@@ -94,24 +97,31 @@ const iconsContainerStyle = {
     display: 'flex',
     alignItems: 'center',
     flexWrap: 'wrap',
-    justifyContent: 'center', // Center icons horizontally by default
+    justifyContent: 'center',
 };
-
 
 const content = {
     textAlign: 'left',
     flex: 1,
 };
 
+const companyNameStyle = {
+    fontSize: '20px',
+    margin: '10px 0',
+    color: '#3e97af',
+};
+
 const jobTitle = {
-    fontSize: '24px',
-    marginBottom: '10px',
+    fontSize: '30px',
+    margin: '10px 0',
     color: '#333',
+    textDecoration: 'underline',
+    textDecorationColor: '#3e97af'
 };
 
 const jobDate = {
     fontSize: '16px',
-    marginBottom: '10px',
+    margin: '10px 0',
     color: '#666',
 };
 
@@ -132,10 +142,10 @@ const iconStyle = {
 
 const experiences = [
     {
-        company: 'Rebel',
+        company: 'weRebel',
         logo: rebel2,
         title: 'Software Engineering Internship',
-        date: 'May 2024 ~ Present',
+        date: 'May 2024 - August 2024',
         description: [
             'Collaborated with a team to design, develop, and deploy features for the Rebel Artist Platforms, ensuring a seamless user experience and robust performance.',
             'Developed user interfaces using JavaScript React Framework, creating responsive and interactive web applications.',
@@ -155,7 +165,28 @@ const experiences = [
         ]
     },
     {
-        company: 'Cisco',
+        company: 'Chapter One',
+        logo: chapone,
+        title: 'Software Engineering Internship',
+        date: 'September 2024 ~ Present',
+        description: [
+            'Worked alongside other team members to design, build, and refine features for the Chapter One platform.',
+            'Engaged in full-stack development tasks, contributing to both client-side and server-side code',
+            'Help integrate third-party APIs and services to expand the platforms capabilities',
+            'Supported the maintenance and improvement of existing features, based on user feedback and performance data'
+        ],
+        icons: [
+            { src: pythonIcon, alt: 'Python' },
+            { src: djangoIcon, alt: 'Django' },
+            { src: rnIcon, alt: 'React Native' },
+            { src: SQLIcon, alt: 'SQL' },
+            { src: figmaIcon, alt: 'Figma' },
+            { src: gcIcon, alt: 'Google Cloud' },
+            { src: gitIcon, alt: 'Git' },
+        ]
+    },
+    {
+        company: 'Cisco Systems',
         logo: ciscoLogo,
         title: 'Cisco Summer Internship',
         date: 'June 2022 - July 2022',
@@ -175,6 +206,33 @@ const experiences = [
         ]
     },
     {
+        company: 'Eye Level',
+        logo: elLogo,
+        title: 'Marketing/Business Intern',
+        date: 'July 2022 - September 2022',
+        description: [
+            'Led initiatives for the annual event coordination, and devised marketing strategies for two locations with 250 students',
+            'Spearheaded marketing and outreach efforts for two Eye Level locations, driving student enrollment and brand visibility',
+            'Developed and implemented intricate marketing strategies, achieving significant results',
+        ],
+        icons: [
+            { src: businessIcon, alt: 'Business' }
+        ]
+    },
+    {
+        company: 'NJ United Pickleball Academy',
+        logo: blLogo,
+        title: 'Pickleball Coach and Program Coordinator ',
+        date: 'June 2024 - August 2024',
+        description: [
+            'Coached and developed pickleball programs for youth, teens, and adults, delivering classes, private lessons, and workshops',
+            'Collaborated on promotional events and social media campaigns to increase engagement and program participation'
+        ],
+        icons: [
+            { src: tennisBallIcon, alt: 'Tennis Ball' }
+        ]
+    },
+    {
         company: 'Randolph Department of Parks and Recreation',
         logo: rpr,
         title: 'Tennis Instructor',
@@ -186,27 +244,6 @@ const experiences = [
         icons: [
             { src: tennisBallIcon, alt: 'Tennis Ball' }
         ]
-    },
-    {
-        company: 'Eye Level',
-        logo: elLogo,
-        title: 'Marketing/Business Intern',
-        date: 'July 2022 - September 2022',
-        description: [
-            'Led initiatives for the annual event coordination, and devised marketing strategies for two locations with 250 students',
-            'Spearheaded marketing and outreach efforts for two Eye Level locations, driving student enrollment and brand visibility',
-            'Developed and implemented intricate marketing strategies, achieving significant results',
-        ],
-    },
-    {
-        company: 'ByteLearn',
-        logo: blLogo,
-        title: 'Business Development Intern',
-        date: 'January 2024 - May 2024',
-        description: [
-            'Developed and executed targeted social media campaigns, resulting in a 20% increase in app downloads within three months.',
-            'Analyzed user feedback and implemented improvements, leading to a 15% increase in user retention rate.'
-        ],
     },
 ];
 

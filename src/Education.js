@@ -13,10 +13,9 @@ function Education() {
                     <Content>
                         <Institution>University of Maryland – College Park</Institution>
                         <Degree>B.S in Computer Science (Specialization in Data Science)</Degree>
-                        <Date>Expected Graduation: May 2027</Date>
-                        <Gpa>GPA: 3.9/4.0</Gpa>
+                        <Date>Expected Graduation: December 2026</Date>
                         <Details>
-                            <Detail>Pursuing double major in Business Management</Detail>
+                            <Detail>Pursuing minor in Statistics</Detail>
                             <Courses>Courses:</Courses>
                             <CourseList>
                                 <Course>CMSC 131: Object-Oriented Programming I</Course>
@@ -30,9 +29,9 @@ function Education() {
                             <Clubs>Clubs:</Clubs>
                             <ClubList>
                                 <Club>Competitive Programming</Club>
-                                <Club>Terps Racing</Club>
-                                <Club>Club Tennis</Club>
                                 <Club>Google Developer at UMD</Club>
+                                <Club>AI/ML</Club>
+                                <Club>Club Tennis</Club>
                             </ClubList>
                         </Details>
                     </Content>
@@ -190,12 +189,6 @@ const Date = styled.div`
     font-size: 18px;
     font-weight: bold;
     color: #0288d1;
-    margin-bottom: 10px;
-`;
-
-const Gpa = styled.p`
-    font-size: 18px;
-    color: #555;
     margin-bottom: 10px;
 `;
 
