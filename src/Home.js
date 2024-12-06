@@ -10,7 +10,12 @@ function Home() {
         </ImageContainer>
         <AnimatedText>
           <Heading>🙋‍♂️ Hello, I'm Narain!</Heading>
-          <SubHeading>Sophomore at the University of Maryland, pursuing a major in Computer Science</SubHeading>
+          {/*<SubHeading>Sophomore at the University of Maryland, pursuing a major in Computer Science</SubHeading> subheading is 36px change that*/}
+          <SubHeading>
+            Computer Science student at the University of Maryland, College Park, specializing in Machine Learning with a minor in Statistics. My passion for technology drives me to explore innovative solutions, from full-stack development to advanced quantitative analytics.
+            In my free time, I enjoy working on exciting projects and playing tennis.
+            Whether it's through developing intuitive applications or diving into analytics, I’m always eager to learn and innovate.
+          </SubHeading>
         </AnimatedText>
       </Content>
       <SVGContainer>
@@ -140,7 +145,7 @@ const Heading = styled.h2`
 
 const SubHeading = styled.p`
   color: white;
-  font-size: 36px;
+  font-size: 20px;
 `;
 
 export default Home;
