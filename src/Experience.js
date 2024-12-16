@@ -142,6 +142,23 @@ const iconStyle = {
 
 const experiences = [
     {
+        company: 'Chapter One',
+        logo: chapone,
+        title: 'Software Engineering Internship',
+        date: 'September 2024 ~ Present',
+        description: [
+            'Worked alongside other team members to design, build, and refine features for the Chapter One platform.',
+            'Engaged in full-stack development tasks, contributing to both client-side and server-side code',
+            'Help integrate third-party APIs and services to expand the platforms capabilities',
+            'Supported the maintenance and improvement of existing features, based on user feedback and performance data'
+        ],
+        icons: [
+            { src: rnIcon, alt: 'React Native' },
+            { src: SQLIcon, alt: 'SQL' },
+            { src: gitIcon, alt: 'Git' },
+        ]
+    },
+    {
         company: 'weRebel',
         logo: rebel2,
         title: 'Software Engineering Internship',
@@ -153,27 +170,6 @@ const experiences = [
             'Employed Agile methodologies, participating in daily stand-ups, sprint planning, and retrospectives to ensure effective communication and continuous improvement.',
             'Worked with version control systems, primarily Git, to manage codebase changes and collaborate with other developers efficiently.',
             'Performed debugging and troubleshooting to resolve issues promptly, maintaining the stability of the platform.',
-        ],
-        icons: [
-            { src: pythonIcon, alt: 'Python' },
-            { src: djangoIcon, alt: 'Django' },
-            { src: rnIcon, alt: 'React Native' },
-            { src: SQLIcon, alt: 'SQL' },
-            { src: figmaIcon, alt: 'Figma' },
-            { src: gcIcon, alt: 'Google Cloud' },
-            { src: gitIcon, alt: 'Git' },
-        ]
-    },
-    {
-        company: 'Chapter One',
-        logo: chapone,
-        title: 'Software Engineering Internship',
-        date: 'September 2024 ~ Present',
-        description: [
-            'Worked alongside other team members to design, build, and refine features for the Chapter One platform.',
-            'Engaged in full-stack development tasks, contributing to both client-side and server-side code',
-            'Help integrate third-party APIs and services to expand the platforms capabilities',
-            'Supported the maintenance and improvement of existing features, based on user feedback and performance data'
         ],
         icons: [
             { src: pythonIcon, alt: 'Python' },
