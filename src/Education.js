@@ -25,9 +25,13 @@ function Education() {
                                 <Course>MATH 141: Calculus II</Course>
                                 <Course>MATH 240: Linear Algebra</Course>
                                 <Course>STAT 400: Applied Probability and Statistics I</Course>
+                                <Course>CMSC 330: Organization of Programming Languages</Course>
+                                <Course>CMSC 351: Algorithms</Course>
+                                <Course>BMGT 355: Foundations of Marketing for Non Business Majors</Course>
                             </CourseList>
                             <Clubs>Clubs:</Clubs>
                             <ClubList>
+                                <Club>Apex Quant</Club>
                                 <Club>Competitive Programming</Club>
                                 <Club>Google Developer at UMD</Club>
                                 <Club>AI/ML</Club>
