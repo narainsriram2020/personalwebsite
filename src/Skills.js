@@ -4,7 +4,7 @@ import styled from 'styled-components';
 function Skills() {
     const skillsList = [
         {
-            name: 'Pytho',
+            name: 'Python',
             logo: '/python.png',
             description: 'High-level, general-purpose programming language',
             proficiency: 'Expert',
