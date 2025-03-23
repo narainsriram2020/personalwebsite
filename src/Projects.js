@@ -211,7 +211,7 @@ function Projects() {
                                                 terp
                                             >
                                                 <TerpIcon />
-                                                Live Demo
+                                                Visit Chatbot
                                             </ActionButton>
                                         )}
                                     </ButtonGroup>
