@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaGithub, FaYoutube, FaExternalLinkAlt } from 'react-icons/fa';
 import { GiTurtleShell } from "react-icons/gi";
@@ -7,6 +7,7 @@ function Projects() {
     const [expandedProject, setExpandedProject] = useState(null);
 
     const projectsList = [
+        // Your existing projects array remains unchanged
         {
             id: "planetterp",
             name: '🐢 PlanetTerp Chatbot',
@@ -54,7 +55,7 @@ function Projects() {
         {
             id: "website",
             name: 'Personal Website',
-            tagline: "Digital portfolio showcasing my professional journey",
+            tagline: "Digital portfolio",
             overview: 'My personal website serves as a digital reflection of who I am professionally. It\'s a virtual space where I compile and showcase my skills, past projects, diverse experiences, volunteer engagements, and educational background. Essentially, it encapsulates all the essential aspects of my professional journey, offering visitors a comprehensive insight into my capabilities and accomplishments.',
             techDetails: 'In crafting this website, I opted for React.js, a powerful JavaScript library renowned for its ability to create dynamic and interactive user interfaces. With React.js, I could design a website that presents information and engages visitors with seamless navigation and visually appealing design elements. Its flexibility allowed me to develop reusable components, ensuring consistency and efficiency across the website. Moreover, React.js facilitated easy updates, enabling me to keep the website current and reflective of my latest endeavors.',
             techStack: ['React.js', 'Styled Components', 'JavaScript', 'HTML/CSS'],
@@ -64,7 +65,7 @@ function Projects() {
         {
             id: "weather",
             name: 'Weather App',
-            tagline: "Global weather information at your fingertips",
+            tagline: "Retrieve weather information for any location",
             overview: 'An app where the user can enter in the coordinates of any place in the world and the current weather, 5-day weather, radar, and other information (humidity, wind speed, etc..) will be returned. ',
             techDetails: 'The app was developed using React Native, a framework for building mobile applications using JavaScript and React. React Native allows for cross-platform development, enabling the creation of iOS and Android apps from a single codebase. The Accuweather API was integrated into the app, facilitating access to weather data through API calls. API integration involves making requests to external servers to retrieve and display information, in this case, weather data such as current conditions, forecasts, and radar images.',
             techStack: ['React Native', 'JavaScript', 'Accuweather API'],
@@ -84,7 +85,7 @@ function Projects() {
         {
             id: "football",
             name: 'Football Table Simulator',
-            tagline: "Interactive soccer match outcome simulation",
+            tagline: "Interactive football simulator",
             overview: 'I developed an app enabling users to simulate football (soccer) match outcomes by selecting their preferred leagues. This endeavor showcases my skills in app development and passion for coding, combining technology with sports simulation.',
             techDetails: 'The app was developed using Swift, Apple\'s programming language for iOS, macOS, watchOS, and tvOS app development. Swift is known for its performance, safety features, and ease of use, making it ideal for building robust and efficient iOS applications. The user-friendly interface was crafted using Swift\'s UIKit framework, which provides a set of components and tools for building interactive user interfaces on iOS devices. Additionally, advanced algorithms were implemented in Swift to ensure accurate match simulations, leveraging the language\'s versatility and power in handling complex computations.',
             techStack: ['Swift', 'UIKit', 'iOS Development'],
@@ -101,96 +102,170 @@ function Projects() {
         }
     };
 
+    // For floating background elements
+    const [particles, setParticles] = useState([]);
+
+    useEffect(() => {
+        // Create particles on component mount
+        const newParticles = [];
+        for (let i = 0; i < 12; i++) {
+            newParticles.push({
+                id: i,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                size: `${Math.random() * 2 + 0.5}rem`,
+                animationDuration: `${Math.random() * 30 + 20}s`,
+                opacity: Math.random() * 0.3 + 0.1,
+            });
+        }
+        setParticles(newParticles);
+    }, []);
+
     return (
         <Section>
-            <Heading>My Projects</Heading>
-            <SubHeading>Turning ideas into reality through code</SubHeading>
-            
-            <GithubProfileButton href="https://github.com/narainsriram2020" target="_blank">
-                <GitHubIcon size={24} />
-                View My GitHub Profile
-            </GithubProfileButton>
-            
-            <ProjectGrid>
-                {projectsList.map((project) => (
-                    <ProjectCard 
-                        key={project.id}
-                        bgColor={project.bgColor}
-                        expanded={expandedProject === project.id}
-                    >
-                        <ProjectHeader>
-                            <ProjectName>{project.name}</ProjectName>
-                            <ProjectTagline>{project.tagline}</ProjectTagline>
-                            <ExpandButton 
-                                onClick={() => toggleProject(project.id)}
-                                expanded={expandedProject === project.id}
-                            >
-                                {expandedProject === project.id ? 'Show Less' : 'Show More'}
-                            </ExpandButton>
-                        </ProjectHeader>
-                        
-                        {expandedProject === project.id && (
-                            <ProjectDetails>
-                                <DetailSection>
-                                    <SectionTitle>Project Overview</SectionTitle>
-                                    <DetailText>{project.overview}</DetailText>
-                                </DetailSection>
-                                
-                                <DetailSection>
-                                    <SectionTitle>Technical Details</SectionTitle>
-                                    <DetailText>{project.techDetails}</DetailText>
-                                </DetailSection>
-                                
-                                <TechStackSection>
-                                    <SectionTitle>Tech Stack</SectionTitle>
-                                    <TechBadgeContainer>
-                                        {project.techStack.map((tech, idx) => (
-                                            <TechBadge key={idx}>{tech}</TechBadge>
-                                        ))}
-                                    </TechBadgeContainer>
-                                </TechStackSection>
-                                
-                                <ButtonGroup>
-                                    {project.githubLink && (
-                                        <ActionButton href={project.githubLink} target="_blank">
-                                            <GitHubIcon />
-                                            GitHub Repo
-                                        </ActionButton>
-                                    )}
-                                    {project.youtubeLink && (
-                                        <ActionButton 
-                                            href={project.youtubeLink} 
-                                            target="_blank"
-                                            youtube
-                                        >
-                                            <YouTubeIcon />
-                                            Demo Video
-                                        </ActionButton>
-                                    )}
-                                    {project.chatLink && (
-                                        <ActionButton 
-                                            href={project.chatLink} 
-                                            target="_blank"
-                                            terp
-                                        >
-                                            <TerpIcon />
-                                            Visit Chatbot
-                                        </ActionButton>
-                                    )}
-                                </ButtonGroup>
-                            </ProjectDetails>
-                        )}
-                    </ProjectCard>
-                ))}
-            </ProjectGrid>
+            {/* Background particles */}
+            {particles.map((particle) => (
+                <Particle
+                    key={particle.id}
+                    style={{
+                        left: particle.left,
+                        top: particle.top,
+                        width: particle.size,
+                        height: particle.size,
+                        animationDuration: particle.animationDuration,
+                        opacity: particle.opacity,
+                    }}
+                />
+            ))}
+
+            <ContentContainer>
+                <Heading>Projects</Heading>
+                <SubHeading></SubHeading>
+                
+                <GithubProfileButton href="https://github.com/narainsriram2020" target="_blank">
+                    <GitHubIcon size={24} />
+                    View My GitHub Profile
+                </GithubProfileButton>
+                
+                <ProjectGrid>
+                    {projectsList.map((project, index) => (
+                        <ProjectCard 
+                            key={project.id}
+                            bgColor={project.bgColor}
+                            expanded={expandedProject === project.id}
+                            isLast={index === projectsList.length - 1}
+                        >
+                            <ProjectHeader>
+                                <ProjectName>{project.name}</ProjectName>
+                                <ProjectTagline>{project.tagline}</ProjectTagline>
+                                <ExpandButton 
+                                    onClick={() => toggleProject(project.id)}
+                                    expanded={expandedProject === project.id}
+                                >
+                                    {expandedProject === project.id ? 'Show Less' : 'Show More'}
+                                </ExpandButton>
+                            </ProjectHeader>
+                            
+                            {expandedProject === project.id && (
+                                <ProjectDetails>
+                                    <DetailSection>
+                                        <SectionTitle>Project Overview</SectionTitle>
+                                        <DetailText>{project.overview}</DetailText>
+                                    </DetailSection>
+                                    
+                                    <DetailSection>
+                                        <SectionTitle>Technical Details</SectionTitle>
+                                        <DetailText>{project.techDetails}</DetailText>
+                                    </DetailSection>
+                                    
+                                    <TechStackSection>
+                                        <SectionTitle>Tech Stack</SectionTitle>
+                                        <TechBadgeContainer>
+                                            {project.techStack.map((tech, idx) => (
+                                                <TechBadge key={idx}>{tech}</TechBadge>
+                                            ))}
+                                        </TechBadgeContainer>
+                                    </TechStackSection>
+                                    
+                                    <ButtonGroup>
+                                        {project.githubLink && (
+                                            <ActionButton href={project.githubLink} target="_blank">
+                                                <GitHubIcon />
+                                                GitHub Repo
+                                            </ActionButton>
+                                        )}
+                                        {project.youtubeLink && (
+                                            <ActionButton 
+                                                href={project.youtubeLink} 
+                                                target="_blank"
+                                                youtube
+                                            >
+                                                <YouTubeIcon />
+                                                Demo Video
+                                            </ActionButton>
+                                        )}
+                                        {project.chatLink && (
+                                            <ActionButton 
+                                                href={project.chatLink} 
+                                                target="_blank"
+                                                terp
+                                            >
+                                                <TerpIcon />
+                                                Live Demo
+                                            </ActionButton>
+                                        )}
+                                    </ButtonGroup>
+                                </ProjectDetails>
+                            )}
+                        </ProjectCard>
+                    ))}
+                </ProjectGrid>
+            </ContentContainer>
         </Section>
     );
 }
 
+// Updated styled components
 const Section = styled.div`
+    position: relative;
     padding: 80px 20px;
-    background: linear-gradient(135deg, #3e97af 0%, #2c7a8f 100%);
+    background: linear-gradient(135deg, #2a6a82 0%, #1c5a6f 100%);
     text-align: center;
+    overflow: hidden;
+`;
+
+const ContentContainer = styled.div`
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+`;
+
+// Animated background particles
+const Particle = styled.div`
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    z-index: 1;
+    animation: float linear infinite;
+
+    @keyframes float {
+        0% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+            transform: translate(100px, 50px) rotate(90deg);
+        }
+        50% {
+            transform: translate(50px, 100px) rotate(180deg);
+        }
+        75% {
+            transform: translate(-50px, 50px) rotate(270deg);
+        }
+        100% {
+            transform: translate(0, 0) rotate(360deg);
+        }
+    }
 `;
 
 const Heading = styled.h2`
@@ -230,13 +305,28 @@ const GithubProfileButton = styled.a`
     }
 `;
 
+// Modified to center the last item
 const ProjectGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
-
+    
+    @media (min-width: 1110px) {
+        & > *:last-child:nth-child(3n-1) {
+            grid-column-end: -2;
+        }
+        
+        & > *:last-child:nth-child(3n-2) {
+            grid-column-end: 3;
+        }
+    }
+    
+    @media (max-width: 1109px) and (min-width: 769px) {
+        & > *:last-child:nth-child(2n) {
+            grid-column: span 2;
+        }
+    }
+    
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
     }
@@ -249,10 +339,27 @@ const ProjectCard = styled.div`
     overflow: hidden;
     transition: all 0.3s ease;
     height: ${props => props.expanded ? 'auto' : '220px'};
+    position: relative;
     
     &:hover {
         transform: ${props => props.expanded ? 'none' : 'translateY(-10px)'};
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #3e97af, #2c7a8f);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    &:hover::before {
+        opacity: 1;
     }
 `;
 
