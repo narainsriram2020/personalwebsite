@@ -4,10 +4,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import 'react-vertical-timeline-component/style.min.css';
 import ciscoLogo from './experienceimages/cisco.png';
 import elLogo from './experienceimages/el2.png';
-import pickleballLogo from './experienceimages/pickleball.png';
-import rpr from './experienceimages/randolphpr.jpeg';
 import pythonIcon from './experienceimages/py.png';
-import tennisBallIcon from './experienceimages/tennis.png';
 import rebel2 from './experienceimages/rebel2.jpeg';
 import gitIcon from './experienceimages/git copy.png';
 import swiftIcon from './experienceimages/swift1.png';
@@ -22,9 +19,22 @@ import nextjs from './experienceimages/next-js copy.png';
 import apex from './experienceimages/apex.jpeg';
 import pandasIcon from './experienceimages/pandas.png';
 import numpyIcon from './experienceimages/numpy.webp';
+import adc from './experienceimages/adc.png'
+import skyvernIcon from './experienceimages/skyvern.png';
 import { useState } from 'react';
 
 const experiences = [
+    {
+        company: 'App Dev Club',
+        logo: adc,
+        title: 'Full Stack Engineer',
+        date: 'February 2025 ~ Present',
+        description: [
+            'Working with Angel Investor Zeki Mokhtarzada and the UMD Hatchery Program to develop an advanced automation tool using Skyvern AI that streamlines document retrieval and processing',
+            'Utilizing LLMs and implementing a RAG system to build an intelligent chat bot tailored for financial institutions, enhancing client interactions and data accessibility'
+        ],
+        icons: [pythonIcon, skyvernIcon, gitIcon],
+    },
     {
         company: 'Apex Quant',
         logo: apex,
@@ -62,17 +72,6 @@ const experiences = [
         icons: [pythonIcon, djangoIcon, rnIcon, SQLIcon, gcIcon, figmaIcon, gitIcon],
     },
     {
-        company: 'NJ United Pickleball Academy',
-        logo: pickleballLogo,
-        title: 'Pickleball Coach and Program Coordinator',
-        date: 'June 2024 - August 2024',
-        description: [
-            'Coached and developed pickleball programs for youth, teens, and adults, delivering classes, private lessons, and workshops.',
-            'Collaborated on promotional events and social media campaigns to increase engagement and program participation.',
-        ],
-        icons: [tennisBallIcon],
-    },
-    {
         company: 'Eye Level',
         logo: elLogo,
         title: 'Marketing/Business Intern',
@@ -94,17 +93,6 @@ const experiences = [
             'Collaborated with cross-functional teams to deliver innovative solutions and meet project objectives.',
         ],
         icons: [pythonIcon, swiftIcon, figmaIcon, gitIcon],
-    },
-    {
-        company: 'Randolph Department of Parks and Recreation',
-        logo: rpr,
-        title: 'Tennis Instructor',
-        date: 'July 2020 - August 2023',
-        description: [
-            'Senior coach for 4 years, teaching kids ages 4-18 the fundamentals of tennis.',
-            'Promoted to Head Coach and created lesson plans.',
-        ],
-        icons: [tennisBallIcon],
     },
 ];
 

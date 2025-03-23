@@ -5,6 +5,12 @@ import { FaGithub, FaYoutube } from 'react-icons/fa'; // Import GitHub and YouTu
 function Projects() {
     const projectsList = [
         {
+            name: '🐢 PlanetTerp Chatbot',
+            overview: 'The PlanetTerp Chatbot is an AI-powered virtual assistant designed to enhance the experience of using the Planet Terp website. Planet Terp is where University of Maryland students can access reviews and ratings of courses, professors, and grade distributions. Unlike traditional search tools, this chatbot offers a fully interactive and immersive experience, allowing students to ask questions naturally and receive detailed responses. Key features include real-time retrieval of course reviews, professor ratings, historical grade distributions, and fun facts about UMD. The chatbot also supports chat history, enabling users to maintain context across conversations, and includes a sidebar with essential UMD-related resources to assist students in navigating their academic journey effectively. With its advanced AI capabilities, the chatbot streamlines the process of finding relevant academic information, helping students make well-informed decisions about their courses and professors.',
+            techDetails: 'The chatbot is developed using Python and built on Streamlit, a powerful framework for creating interactive web applications. This enables a clean and user-friendly interface, ensuring seamless interaction. The chatbot’s AI-powered responses are made possible through the Google Gemini API, allowing it to generate context-aware, precise answers to user queries. To enhance search efficiency, the chatbot incorporates semantic search, ensuring students receive the most relevant information based on their input. A structured backend system handles query processing, and caching mechanisms are implemented to optimize response times, minimizing delays and improving user experience.',
+            githubLink: 'your_github_repo_link_here',
+        },   
+        {
             name: 'wAIste',
             overview: (
                 <>
