@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { FaGithub, FaYoutube, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaYoutube } from 'react-icons/fa';
 import { GiTurtleShell } from "react-icons/gi";
 
 function Projects() {
