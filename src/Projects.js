@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaGithub, FaYoutube } from 'react-icons/fa'; // Import GitHub and YouTube icons from react-icons/fa
+import { GiTurtleShell } from "react-icons/gi";
 
 function Projects() {
     const projectsList = [
@@ -8,7 +9,8 @@ function Projects() {
             name: '🐢 PlanetTerp Chatbot',
             overview: 'The PlanetTerp Chatbot is an AI-powered virtual assistant designed to enhance the experience of using the Planet Terp website. Planet Terp is where University of Maryland students can access reviews and ratings of courses, professors, and grade distributions. Unlike traditional search tools, this chatbot offers a fully interactive and immersive experience, allowing students to ask questions naturally and receive detailed responses. Key features include real-time retrieval of course reviews, professor ratings, historical grade distributions, and fun facts about UMD. The chatbot also supports chat history, enabling users to maintain context across conversations, and includes a sidebar with essential UMD-related resources to assist students in navigating their academic journey effectively. With its advanced AI capabilities, the chatbot streamlines the process of finding relevant academic information, helping students make well-informed decisions about their courses and professors.',
             techDetails: 'The chatbot is developed using Python and built on Streamlit, a powerful framework for creating interactive web applications. This enables a clean and user-friendly interface, ensuring seamless interaction. The chatbot’s AI-powered responses are made possible through the Google Gemini API, allowing it to generate context-aware, precise answers to user queries. To enhance search efficiency, the chatbot incorporates semantic search, ensuring students receive the most relevant information based on their input. A structured backend system handles query processing, and caching mechanisms are implemented to optimize response times, minimizing delays and improving user experience.',
-            githubLink: 'your_github_repo_link_here',
+            githubLink: 'https://github.com/narainsriram2020/PlanetTerpChatBot',
+            chatLink: 'https://planetterp-chat-bot.streamlit.app/',
         },   
         {
             name: 'wAIste',
@@ -113,6 +115,31 @@ function Projects() {
         }
     `;
 
+    const TerpButton = styled.a`
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px; /* Increased margin */
+        padding: 12px 24px; /* Increased padding */
+        font-size: 18px; /* Increased font size */
+        color: #555;
+        background-color: #fff;
+        border: 2px solid #555;
+        border-radius: 5px;
+        text-decoration: none; /* Remove underline from anchor */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for the hover effect */
+
+        &:hover {
+            transform: scale(1.05); /* Scale up the button on hover */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover for highlighting effect */
+        }
+
+        @media (max-width: 600px) {
+        width: 100%; /* Adjusted width for smaller screens */
+        max-width: 300px; /* Added max-width to prevent overflow */
+        }
+    `;
+
     const GitHubIcon = styled(FaGithub)`
         margin-right: 10px; /* Increased margin */
         transition: transform 0.3s ease; /* Add transition for the rotation effect */
@@ -123,6 +150,15 @@ function Projects() {
     `;
 
     const YouTubeIcon = styled(FaYoutube)`
+        margin-right: 10px; /* Increased margin */
+        transition: transform 0.3s ease; /* Add transition for the rotation effect */
+
+        ${YouTubeButton}:hover & {
+            transform: rotate(360deg); /* Rotate the icon 360 degrees on hover */
+        }
+    `;
+
+    const TerpIcon = styled(FaYoutube)`
         margin-right: 10px; /* Increased margin */
         transition: transform 0.3s ease; /* Add transition for the rotation effect */
 
@@ -149,6 +185,18 @@ function Projects() {
                         <ProjectSectionTitle>Technical Details:</ProjectSectionTitle>
                         <ProjectDescription>{project.techDetails}</ProjectDescription>
                         {/* Conditional rendering for YouTube and GitHub buttons */}
+                        {project.name === '🐢 PlanetTerp Chatbot' && (
+                            <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
+                                <TerpButton href={project.chatLink} target="_blank">
+                                    <TerpIcon />
+                                    View Chatbot
+                                </TerpButton>
+                                <GitHubButton href={project.githubLink} target="_blank">
+                                    <GitHubIcon />
+                                    View on GitHub
+                                </GitHubButton>
+                            </div>
+                        )}
                         {project.name === 'wAIste' && (
                             <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
                                 <YouTubeButton href={project.youtubeLink} target="_blank">
@@ -169,7 +217,7 @@ function Projects() {
                                 </YouTubeButton>
                             </div>
                         )}
-                        {project.name !== 'wAIste' && project.name !== 'Cisco Hackathon' && (
+                        {project.name !== 'wAIste' && project.name !== 'Cisco Hackathon' && project.name !== '🐢 PlanetTerp Chatbot' && (
                             <GitHubButton href={project.githubLink} target="_blank">
                                 <GitHubIcon />
                                 View on GitHub
