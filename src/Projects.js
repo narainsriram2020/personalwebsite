@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, {useState} from 'react';
+import styled, { keyframes } from 'styled-components';
 import { FaGithub, FaYoutube } from 'react-icons/fa';
 import { GiTurtleShell } from "react-icons/gi";
 
@@ -7,7 +7,18 @@ function Projects() {
     const [expandedProject, setExpandedProject] = useState(null);
 
     const projectsList = [
-        // Your existing projects array remains unchanged
+        {
+            id: "bizcamp",
+            name: 'BizCamp',
+            tagline: "Boost company workflow with AI",
+            overview: 'BizCamp is an AI-driven productivity tool designed to streamline company workflow and optimize team collaboration. Drawing inspiration from Salesforce and CRM software, BizCamp offers real-time meeting transcriptions, smart meeting summaries, concept graph generation, and an integrated AI chatbot. By transforming meeting data into actionable insights, BizCamp empowers organizations to improve communication, track engagement, and enhance decision-making. The platform is built with scalability, security, and real-world deployment in mind, helping businesses manage knowledge and extract value from every conversation.',
+            techDetails: 'BizCamp is built using a modern tech stack, including Next.js for the frontend, FastAPI for the backend, MongoDB for structured data management, and Qdrant as the vector database for semantic search and retrieval. AssemblyAI provides real-time transcription capabilities, while GitHub is used for version control and collaboration. Special attention was given to designing an efficient, scalable database architecture, ensuring secure data handling, and optimizing AI-driven features to handle large volumes of meeting data.',
+            techStack: ['Next.js', 'FastAPI', 'MongoDB', 'Qdrant', 'AssemblyAI', 'GitHub'],
+            githubLink: 'https://github.com/aluthra23/bizcamp',
+            youtubeLink: 'https://www.youtube.com/watch?v=0aQxmoBndzs',
+            devPostLink: 'https://devpost.com/software/902064?ref_content=existing_user_added_to_software_team&ref_feature=portfolio&ref_medium=email&utm_campaign=software&utm_content=added_to_software_team&utm_medium=email&utm_source=transactional#app-team',
+            bgColor: '#e9f7ef', // Light green
+        },
         {
             id: "planetterp",
             name: '🐢 PlanetTerp Chatbot',
@@ -17,6 +28,16 @@ function Projects() {
             techStack: ['Python', 'Streamlit', 'Google Gemini API', 'Semantic Search'],
             githubLink: 'https://github.com/narainsriram2020/PlanetTerpChatBot',
             chatLink: 'https://planetterp-chat-bot.streamlit.app/',
+            bgColor: '#e9f7ef', // Light green
+        },
+        {
+            id: "canadian_options",
+            name: 'CA Options Pricing',
+            tagline: "Boost company workflow with AI",
+            overview: 'CA Options Pricing is a financial modeling project focused on building robust options pricing tools for Canadian institutions. We applied classical models such as the Black-Scholes and the Binomial Tree method to Canadian financial datasets. Our main focus was in the Canadian banking sector. The goal is to provide replicable, scalable options pricing methodologies grounded in financial theory and real market behavior.',
+            techDetails: 'The project structure is built around modular Jupyter notebooks and Python scripts. Data is managed using efficient parquet file storage formats and processed with Python’s pandas library. Special emphasis is placed on realistic parameter calibration and model validation against market data.',
+            techStack: ['Python', 'Pandas', 'NumPy', 'Scipy', 'Matplotlib'],
+            githubLink: 'https://github.com/3752V/CA-options-pricing',
             bgColor: '#e9f7ef', // Light green
         },
         {
@@ -102,82 +123,46 @@ function Projects() {
         }
     };
 
-    // For floating background elements
-    const [particles, setParticles] = useState([]);
-
-    useEffect(() => {
-        // Create particles on component mount
-        const newParticles = [];
-        for (let i = 0; i < 12; i++) {
-            newParticles.push({
-                id: i,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                size: `${Math.random() * 2 + 0.5}rem`,
-                animationDuration: `${Math.random() * 30 + 20}s`,
-                opacity: Math.random() * 0.3 + 0.1,
-            });
-        }
-        setParticles(newParticles);
-    }, []);
-
     return (
-        <Section>
-            {/* Background particles */}
-            {particles.map((particle) => (
-                <Particle
-                    key={particle.id}
-                    style={{
-                        left: particle.left,
-                        top: particle.top,
-                        width: particle.size,
-                        height: particle.size,
-                        animationDuration: particle.animationDuration,
-                        opacity: particle.opacity,
-                    }}
-                />
-            ))}
-
-            <ContentContainer>
+        <SectionContainer>
+            <ContentWrapper>
                 <Heading>Projects</Heading>
-                <SubHeading></SubHeading>
-                
+
                 <GithubProfileButton href="https://github.com/narainsriram2020" target="_blank">
-                    <GitHubIcon size={24} />
-                    View My GitHub Profile
+                <GitHubIcon size={24} style={{ marginRight: '8px' }} />
+                View My GitHub Profile
                 </GithubProfileButton>
-                
+
                 <ProjectGrid>
                     {projectsList.map((project, index) => (
-                        <ProjectCard 
+                        <ProjectCard
                             key={project.id}
-                            bgColor={project.bgColor}
                             expanded={expandedProject === project.id}
                             isLast={index === projectsList.length - 1}
                         >
                             <ProjectHeader>
                                 <ProjectName>{project.name}</ProjectName>
                                 <ProjectTagline>{project.tagline}</ProjectTagline>
-                                <ExpandButton 
+                                <ExpandButton
                                     onClick={() => toggleProject(project.id)}
                                     expanded={expandedProject === project.id}
                                 >
                                     {expandedProject === project.id ? 'Show Less' : 'Show More'}
                                 </ExpandButton>
                             </ProjectHeader>
-                            
+
                             {expandedProject === project.id && (
                                 <ProjectDetails>
                                     <DetailSection>
                                         <SectionTitle>Project Overview</SectionTitle>
                                         <DetailText>{project.overview}</DetailText>
                                     </DetailSection>
-                                    
+
                                     <DetailSection>
                                         <SectionTitle>Technical Details</SectionTitle>
                                         <DetailText>{project.techDetails}</DetailText>
                                     </DetailSection>
-                                    
+
                                     <TechStackSection>
                                         <SectionTitle>Tech Stack</SectionTitle>
                                         <TechBadgeContainer>
@@ -186,7 +171,7 @@ function Projects() {
                                             ))}
                                         </TechBadgeContainer>
                                     </TechStackSection>
-                                    
+
                                     <ButtonGroup>
                                         {project.githubLink && (
                                             <ActionButton href={project.githubLink} target="_blank">
@@ -195,8 +180,8 @@ function Projects() {
                                             </ActionButton>
                                         )}
                                         {project.youtubeLink && (
-                                            <ActionButton 
-                                                href={project.youtubeLink} 
+                                            <ActionButton
+                                                href={project.youtubeLink}
                                                 target="_blank"
                                                 youtube
                                             >
@@ -205,8 +190,8 @@ function Projects() {
                                             </ActionButton>
                                         )}
                                         {project.chatLink && (
-                                            <ActionButton 
-                                                href={project.chatLink} 
+                                            <ActionButton
+                                                href={project.chatLink}
                                                 target="_blank"
                                                 terp
                                             >
@@ -220,112 +205,81 @@ function Projects() {
                         </ProjectCard>
                     ))}
                 </ProjectGrid>
-            </ContentContainer>
-        </Section>
+            </ContentWrapper>
+        </SectionContainer>
     );
 }
 
-// Updated styled components
-const Section = styled.div`
-    position: relative;
-    padding: 80px 20px;
-    background: linear-gradient(135deg, #2a6a82 0%, #1c5a6f 100%);
-    text-align: center;
-    overflow: hidden;
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
-const ContentContainer = styled.div`
-    position: relative;
-    z-index: 2;
-    max-width: 1400px;
+const SectionContainer = styled.div`
+    padding: 100px 0;
+    background-color: #0a192f;
+    color: #e6f1ff;
+`;
+
+const ContentWrapper = styled.div`
+    max-width: 1200px;
     margin: 0 auto;
-`;
-
-// Animated background particles
-const Particle = styled.div`
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    z-index: 1;
-    animation: float linear infinite;
-
-    @keyframes float {
-        0% {
-            transform: translate(0, 0) rotate(0deg);
-        }
-        25% {
-            transform: translate(100px, 50px) rotate(90deg);
-        }
-        50% {
-            transform: translate(50px, 100px) rotate(180deg);
-        }
-        75% {
-            transform: translate(-50px, 50px) rotate(270deg);
-        }
-        100% {
-            transform: translate(0, 0) rotate(360deg);
-        }
-    }
+    padding: 0 20px;
 `;
 
 const Heading = styled.h2`
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-`;
-
-const SubHeading = styled.p`
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 40px;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: #e6f1ff;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: #64ffda;
+    }
 `;
 
 const GithubProfileButton = styled.a`
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 50px;
-    padding: 14px 30px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #fff;
-    background-color: #333;
-    border: none;
-    border-radius: 50px;
+    background-color: #112240;
+    color: #64ffda;
+    border: 1px solid #64ffda;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 auto 40px;
+    max-width: 250px;
     text-decoration: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-
+    
     &:hover {
+        background-color: rgba(100, 255, 218, 0.1);
         transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        background-color: #222;
     }
 `;
 
-// Modified to center the last item
 const ProjectGrid = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 30px;
-    
-    @media (min-width: 1110px) {
-        & > *:last-child:nth-child(3n-1) {
-            grid-column-end: -2;
-        }
-        
-        & > *:last-child:nth-child(3n-2) {
-            grid-column-end: 3;
-        }
-    }
-    
-    @media (max-width: 1109px) and (min-width: 769px) {
-        & > *:last-child:nth-child(2n) {
-            grid-column: span 2;
-        }
-    }
     
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
@@ -333,98 +287,88 @@ const ProjectGrid = styled.div`
 `;
 
 const ProjectCard = styled.div`
-    background-color: ${props => props.bgColor || '#fff'};
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background-color: #112240;
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+    border: 1px solid #1e3a5f;
     transition: all 0.3s ease;
     height: ${props => props.expanded ? 'auto' : '220px'};
-    position: relative;
+    display: flex;
+    flex-direction: column;
     
     &:hover {
-        transform: ${props => props.expanded ? 'none' : 'translateY(-10px)'};
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        border-color: #64ffda;
+        box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
     }
     
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(90deg, #3e97af, #2c7a8f);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    &:hover::before {
-        opacity: 1;
-    }
+    animation: ${fadeIn} 0.5s ease-out;
+    animation-delay: ${props => Math.min(0.1 * props.index, 1)}s;
 `;
 
 const ProjectHeader = styled.div`
-    padding: 25px;
-    position: relative;
+    padding: 25px 25px 20px;
+    border-bottom: ${props => props.expanded ? '1px solid #1e3a5f' : 'none'};
 `;
 
 const ProjectName = styled.h3`
     font-size: 24px;
     font-weight: 700;
-    color: #333;
-    margin-bottom: 8px;
+    color: #e6f1ff;
+    margin: 0 0 10px;
 `;
 
 const ProjectTagline = styled.p`
     font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
-    font-style: italic;
+    color: #64ffda;
+    margin: 0 0 15px;
 `;
 
 const ExpandButton = styled.button`
     background: none;
     border: none;
-    color: #3e97af;
-    font-weight: 600;
+    color: #64ffda;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
     padding: 0;
-    font-size: 16px;
-    text-decoration: underline;
-    transition: color 0.2s ease;
-
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    
     &:hover {
-        color: #2c7a8f;
+        color: #64ffda;
+        text-decoration: underline;
     }
 `;
 
 const ProjectDetails = styled.div`
-    padding: 0 25px 25px;
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 `;
 
 const DetailSection = styled.div`
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 `;
 
 const SectionTitle = styled.h4`
     font-size: 18px;
-    font-weight: 700;
-    color: #444;
-    margin-bottom: 12px;
-    text-align: left;
-    padding-bottom: 6px;
-    border-bottom: 2px solid rgba(62, 151, 175, 0.3);
+    font-weight: 600;
+    color: #64ffda;
+    margin: 0 0 10px;
 `;
 
-const DetailText = styled.p`
+const DetailText = styled.div`
     font-size: 16px;
-    color: #555;
     line-height: 1.6;
-    text-align: left;
+    color: #a8b2d1;
 `;
 
 const TechStackSection = styled.div`
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 `;
 
 const TechBadgeContainer = styled.div`
@@ -434,46 +378,48 @@ const TechBadgeContainer = styled.div`
 `;
 
 const TechBadge = styled.span`
-    padding: 6px 12px;
-    background-color: rgba(62, 151, 175, 0.15);
-    color: #2c7a8f;
-    border-radius: 20px;
+    background-color: rgba(100, 255, 218, 0.1);
+    color: #64ffda;
+    padding: 5px 10px;
+    border-radius: 4px;
     font-size: 14px;
-    font-weight: 500;
+    font-family: 'Roboto Mono', monospace;
 `;
 
 const ButtonGroup = styled.div`
     display: flex;
-    flex-wrap: wrap;
     gap: 15px;
-    margin-top: 20px;
-    justify-content: flex-start;
+    margin-top: auto;
+    
+    @media (max-width: 600px) {
+        flex-direction: column;
+        gap: 10px;
+    }
 `;
 
 const ActionButton = styled.a`
     display: flex;
     align-items: center;
-    padding: 10px 18px;
-    background-color: ${props => {
-        if (props.youtube) return '#FF0000';
-        if (props.terp) return '#4CAF50';
-        return '#333';
-    }};
-    color: white;
-    border-radius: 6px;
+    justify-content: center;
+    gap: 8px;
+    background-color: transparent;
+    color: #64ffda;
+    border: 1px solid #64ffda;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 14px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     
     &:hover {
-        transform: translateY(-3px);
-        opacity: 0.9;
+        background-color: rgba(100, 255, 218, 0.1);
+        transform: translateY(-2px);
     }
 `;
 
 const GitHubIcon = styled(FaGithub)`
-    margin-right: 8px;
+    font-size: ${props => props.size ? `${props.size}px` : '16px'};
+    color: #64ffda;
 `;
 
 const YouTubeIcon = styled(FaYoutube)`
@@ -485,13 +431,11 @@ const TerpIcon = styled(GiTurtleShell)`
 `;
 
 const StyledLink = styled.a`
-    color: #3e97af;
-    font-weight: bold;
+    color: #64ffda;
     text-decoration: underline;
-    cursor: pointer;
     
     &:hover {
-        color: #2c7a8f;
+        text-decoration: none;
     }
 `;
 

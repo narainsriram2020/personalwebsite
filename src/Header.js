@@ -7,7 +7,6 @@ function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-vars
     let lastScrollPosition = window.scrollY;
 
     const handleScroll = () => {
@@ -21,9 +20,7 @@ function Header() {
           const { offsetTop, offsetHeight } = element;
           const isInView = scrollPosition >= offsetTop - 50 && scrollPosition < offsetTop + offsetHeight - 50;
 
-          // Adjust the condition for the Contact section specifically
           if (section === 'contact') {
-            // Check if scroll position is within the section's top to bottom
             const isInContactView = scrollPosition >= offsetTop - 50 && scrollPosition < offsetTop + window.innerHeight - 50;
             if (isInContactView && section !== activeSection) {
               setActiveSection(section);
@@ -53,8 +50,7 @@ function Header() {
       if (section) {
         let offset = 0;
         if (window.innerWidth <= 768) {
-          // Adjust the offset for mobile
-          offset = 290; // Adjust this offset as needed
+          offset = 290;
         }
 
         const offsetTop = section.offsetTop - offset;
@@ -62,7 +58,6 @@ function Header() {
       }
     }
 
-    // Close mobile menu after clicking on a link
     setIsMobileMenuOpen(false);
   };
 
@@ -78,10 +73,10 @@ function Header() {
     <Container>
       <HeaderContainer isAtTop={isAtTop}>
         <HeaderContent>
-          <LogoContainer isAtTop={isAtTop}>
-            <Logo>Narain Sriram</Logo>
+          <LogoContainer>
+            <Logo>NS</Logo>
           </LogoContainer>
-          <NavToggle onClick={toggleMobileMenu}>
+          <NavToggle onClick={toggleMobileMenu} isMobileMenuOpen={isMobileMenuOpen}>
             <span />
             <span />
             <span />
@@ -100,7 +95,6 @@ function Header() {
       {!isAtTop && window.innerWidth <= 768 && (
         <BackToTopBox onClick={scrollToTop}>
           <UpArrow />
-          Back to Top
         </BackToTopBox>
       )}
       {!isAtTop && window.innerWidth > 768 && (
@@ -114,15 +108,21 @@ function Header() {
 
 const StyledIsland = ({ activeSection, handleNavClick }) => (
   <Island>
-    <NavLinks>
-      <NavLink active={activeSection === 'home'} onClick={() => handleNavClick('home')}>Home</NavLink>
-      <NavLink active={activeSection === 'skills'} onClick={() => handleNavClick('skills')}>Skills</NavLink>
-      <NavLink active={activeSection === 'experience'} onClick={() => handleNavClick('experience')}>Experience</NavLink>
-      <NavLink active={activeSection === 'projects'} onClick={() => handleNavClick('projects')}>Projects</NavLink>
-      <NavLink active={activeSection === 'education'} onClick={() => handleNavClick('education')}>Education</NavLink>
-      <NavLink active={activeSection === 'volunteering'} onClick={() => handleNavClick('volunteering')}>Volunteering</NavLink>
-      <NavLink active={activeSection === 'contact'} onClick={() => handleNavClick('contact')}>Contact</NavLink>
-    </NavLinks>
+    <IslandNavLinks>
+      <IslandNavItem active={activeSection === 'home'} onClick={() => handleNavClick('home')}>Home</IslandNavItem>
+      <Divider />
+      <IslandNavItem active={activeSection === 'skills'} onClick={() => handleNavClick('skills')}>Skills</IslandNavItem>
+      <Divider />
+      <IslandNavItem active={activeSection === 'experience'} onClick={() => handleNavClick('experience')}>Experience</IslandNavItem>
+      <Divider />
+      <IslandNavItem active={activeSection === 'projects'} onClick={() => handleNavClick('projects')}>Projects</IslandNavItem>
+      <Divider />
+      <IslandNavItem active={activeSection === 'education'} onClick={() => handleNavClick('education')}>Education</IslandNavItem>
+      <Divider />
+      <IslandNavItem active={activeSection === 'volunteering'} onClick={() => handleNavClick('volunteering')}>Volunteering</IslandNavItem>
+      <Divider />
+      <IslandNavItem active={activeSection === 'contact'} onClick={() => handleNavClick('contact')}>Contact</IslandNavItem>
+    </IslandNavLinks>
   </Island>
 );
 
@@ -142,12 +142,12 @@ const Container = styled.div`
 `;
 
 const HeaderContainer = styled.div`
-  background-color: #0e4166;
-  color: white;
+  background-color: #0a192f;
+  color: #e6f1ff;
   padding: 15px 0;
   transition: opacity 0.3s ease;
   opacity: ${({ isAtTop }) => (isAtTop ? '1' : '0')};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 
   @media (max-width: 768px) {
     padding: 10px 0;
@@ -160,45 +160,38 @@ const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
 
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
-    padding: 0 20px; /* Add padding to center the menu items */
   }
 `;
 
 const LogoContainer = styled.div`
   flex: 1;
-  text-align: center;
-  margin-right: 81px;
+  text-align: left;
 
   @media (max-width: 768px) {
-    text-align: left;
     margin-bottom: 10px;
   }
 `;
 
 const Logo = styled.div`
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
-  margin-right: 130px;
-  transition: transform 0.3s ease;
-  transform: ${({ isAtTop }) => (isAtTop ? 'translateX(-50%)' : 'none')};
-
-  @media (max-width: 768px) {
-    transform: none;
-  }
+  color: #64ffda;
+  letter-spacing: 1px;
 `;
 
 const NavToggle = styled.div`
   display: none;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 20px;
   flex-direction: column;
   justify-content: space-between;
-  height: 30px;
+  height: 24px;
   cursor: pointer;
   z-index: 1001;
 
@@ -207,15 +200,13 @@ const NavToggle = styled.div`
 
     span {
       display: block;
-      width: 30px;
-      height: 4px;
-      background-color: #fff;
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, top 0.3s ease-in-out;
-      position: relative;
+      width: 28px;
+      height: 2px;
+      background-color: #64ffda;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
       &:nth-child(1) {
-        transform: ${({ isMobileMenuOpen }) => isMobileMenuOpen ? 'rotate(45deg)' : 'rotate(0)'};
-        top: ${({ isMobileMenuOpen }) => isMobileMenuOpen ? '10px' : '0'};
+        transform: ${({ isMobileMenuOpen }) => isMobileMenuOpen ? 'rotate(45deg) translate(6px, 6px)' : 'rotate(0)'};
       }
 
       &:nth-child(2) {
@@ -223,8 +214,7 @@ const NavToggle = styled.div`
       }
 
       &:nth-child(3) {
-        transform: ${({ isMobileMenuOpen }) => isMobileMenuOpen ? 'rotate(-45deg)' : 'rotate(0)'};
-        top: ${({ isMobileMenuOpen }) => isMobileMenuOpen ? '-10px' : '0'};
+        transform: ${({ isMobileMenuOpen }) => isMobileMenuOpen ? 'rotate(-45deg) translate(6px, -6px)' : 'rotate(0)'};
       }
     }
   }
@@ -233,7 +223,7 @@ const NavToggle = styled.div`
 const NavLinks = styled.div`
   display: flex;
   gap: 20px;
-  justify-content: ${({ isAtTop }) => (isAtTop ? 'flex-end' : 'flex-start')};
+  justify-content: flex-end;
   transition: all 0.3s ease;
 
   @media (max-width: 768px) {
@@ -243,30 +233,46 @@ const NavLinks = styled.div`
     margin-top: ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? '20px' : '0')};
     max-height: ${({ isMobileMenuOpen }) => (isMobileMenuOpen ? '500px' : '0')};
     overflow: hidden;
+    width: 100%;
   }
 `;
 
 const NavLink = styled.button`
-  font-size: 18px;
-  color: ${({ active }) => (active ? '#3e76af' : '#fff')};
-  background-color: ${({ active }) => (active ? '#fff' : 'transparent')};
+  font-size: 16px;
+  color: ${({ active }) => (active ? '#64ffda' : '#ccd6f6')};
+  background-color: transparent;
   border: none;
-  border-radius: 20px;
   cursor: pointer;
   padding: 8px 16px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s, transform 0.2s;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: ${({ active }) => (active ? '100%' : '0')};
+    height: 2px;
+    background-color: #64ffda;
+    transform: translateX(-50%);
+    transition: width 0.3s;
+  }
 
   &:hover {
-    background-color: ${({ active }) => (active ? '#fff' : '#3e76af')};
-    color: ${({ active }) => (active ? '#3e76af' : '#fff')};
+    color: #64ffda;
+    transform: translateY(-2px);
+    
+    &:after {
+      width: 100%;
+    }
   }
 
   @media (max-width: 768px) {
     font-size: 16px;
-    padding: 6px 12px;
+    padding: 10px 0;
     width: 100%;
-    text-align: center;
-    border-radius: 10px;
+    text-align: left;
   }
 `;
 
@@ -279,52 +285,87 @@ const IslandContainer = styled.div`
 `;
 
 const Island = styled.div`
-  background-color: #0e4166;
-  color: white;
-  border-radius: 20px;
-  padding: 10px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(10, 25, 47, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 8px 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   animation: ${fadeDown} 0.5s ease forwards;
+  border: 1px solid rgba(100, 255, 218, 0.1);
+`;
 
-  @media (max-width: 768px) {
-    padding: 8px 16px;
+const IslandNavLinks = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const IslandNavItem = styled.button`
+  font-size: 14px;
+  color: ${({ active }) => (active ? '#64ffda' : '#ccd6f6')};
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 10px;
+  transition: color 0.3s, transform 0.2s;
+  position: relative;
+  font-weight: ${({ active }) => (active ? 'bold' : 'normal')};
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: ${({ active }) => (active ? '60%' : '0')};
+    height: 2px;
+    background-color: #64ffda;
+    transform: translateX(-50%);
+    transition: width 0.3s;
   }
+
+  &:hover {
+    color: #64ffda;
+    
+    &:after {
+      width: 60%;
+    }
+  }
+`;
+
+const Divider = styled.div`
+  width: 1px;
+  height: 12px;
+  background-color: rgba(100, 255, 218, 0.3);
 `;
 
 const BackToTopBox = styled.div`
   position: fixed;
-  bottom: 20px; /* Adjusted to be at the bottom */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(14, 65, 102, 0.8); /* Transparent background */
-  color: white;
-  border-radius: 10px;
-  padding: 15px 25px; /* Increased size */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  z-index: 1000;
-  font-size: 16px; /* Increased font size */
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(100, 255, 218, 0.2);
+  color: #64ffda;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
 
   &:hover {
-    background-color: rgba(62, 118, 175, 0.8);
-  }
-
-  @media (min-width: 769px) {
-    display: none;
+    background-color: rgba(100, 255, 218, 0.3);
+    transform: translateY(-3px);
   }
 `;
 
 const UpArrow = styled.span`
-  border: solid white;
-  border-width: 0 4px 4px 0;
+  border: solid #64ffda;
+  border-width: 0 2px 2px 0;
   display: inline-block;
-  padding: 6px;
+  padding: 4px;
   transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
 `;
 
 export default Header;

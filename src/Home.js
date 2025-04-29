@@ -1,146 +1,186 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 
+const codeSnippets = [
+  "System.out.println(\"Hello, world!\");",
+  "import { useState, useEffect } from 'react';",
+  "for (int i = 0; i < arr.length; i++) {",
+  "def train_model(dataset):",
+  'pip install -r "requirements.txt"',
+  'git commit -am "Fixed Bugs" ',
+  "import pandas as pd",
+  "if (user != null && user.isActive()) {",
+  "<input type=\"text\" placeholder=\"Search\">",
+  "body { background-color: #0a192f; }",
+  "add eax, ebx",
+  "import Head from 'next/head';",
+  "app.get('/api', (req, res) => res.json(data));",
+  "from fastapi import FastAPI",
+  "SELECT * FROM users WHERE active = 1;",
+  "docker-compose up -d",
+  "locahost:3000"
+];
+
 function Home() {
+  const [isVisible, setIsVisible] = useState(false);
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(true), 800);
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    const elements = Array.from({ length: 20 }, () => ({
+      text: codeSnippets[Math.floor(Math.random() * codeSnippets.length)],
+      x: Math.random() * width,
+      y: Math.random() * height,
+      speed: Math.random() * 0.5 + 0.2,
+      fontSize: Math.random() * 12 + 10,
+      opacity: Math.random() * 0.2 + 0.1,
+    }));
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      elements.forEach(el => {
+        ctx.globalAlpha = el.opacity;
+        ctx.font = `${el.fontSize}px 'Roboto Mono', monospace`;
+        ctx.fillStyle = '#64ffda';
+        ctx.fillText(el.text, el.x, el.y);
+
+        el.y -= el.speed;
+        if (el.y < -50) {
+          el.y = height + 50;
+          el.x = Math.random() * width;
+          el.text = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+        }
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <Container>
-      <Content>
-        <ImageContainer>
-          <img src="/profile4.jpg" alt="Profile 1" style={imageStyle} />
-        </ImageContainer>
-        <AnimatedText>
-          <Heading>🙋‍♂️ Hello, I'm Narain!</Heading>
-          {<SubHeading>Sophomore at the University of Maryland, pursuing a major in Computer Science</SubHeading>}
-        </AnimatedText>
+      <Canvas ref={canvasRef} />
+
+      <GradientOverlay />
+
+      <Content isVisible={isVisible}>
+        <Greeting>Hi, my name is</Greeting>
+        <Name>Narain Sriram.</Name>
+        <Description>
+          I'm a sophomore Computer Science student at the University of Maryland,
+          specializing in Machine Learning. I focus on developing modern applications
+          and creating sleek, intuitive user experiences.
+        </Description>
       </Content>
-      <SVGContainer>
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
-          <defs>
-            <linearGradient id="bg">
-              <stop offset="0%" style={{ stopColor: 'rgba(130, 158, 249, 0.06)' }}></stop>
-              <stop offset="50%" style={{ stopColor: 'rgba(76, 190, 255, 0.6)' }}></stop>
-              <stop offset="100%" style={{ stopColor: 'rgba(115, 209, 72, 0.2)' }}></stop>
-            </linearGradient>
-            <path id="wave" fill="url(#bg)" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
-                            s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z" />
-          </defs>
-          <g>
-            <use xlinkHref='#wave' opacity=".3">
-              <animateTransform
-                attributeName="transform"
-                attributeType="XML"
-                type="translate"
-                dur="10s"
-                calcMode="spline"
-                values="270 230; -334 180; 270 230"
-                keyTimes="0; .5; 1"
-                keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-                repeatCount="indefinite" />
-            </use>
-            <use xlinkHref='#wave' opacity=".6">
-              <animateTransform
-                attributeName="transform"
-                attributeType="XML"
-                type="translate"
-                dur="8s"
-                calcMode="spline"
-                values="-270 230;243 220;-270 230"
-                keyTimes="0; .6; 1"
-                keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-                repeatCount="indefinite" />
-            </use>
-            <use xlinkHref='#wave' opacity=".9">
-              <animateTransform
-                attributeName="transform"
-                attributeType="XML"
-                type="translate"
-                dur="6s"
-                calcMode="spline"
-                values="0 230;-140 200;0 230"
-                keyTimes="0; .4; 1"
-                keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-                repeatCount="indefinite" />
-            </use>
-          </g>
-        </svg>
-      </SVGContainer>
     </Container>
   );
 }
 
+// Animations
 const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 `;
 
+// Styled Components
 const Container = styled.div`
   position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 0px);
+  min-height: 100vh;
+  padding: 0 50px;
   overflow: hidden;
-  text-align: center;
-  background-color: #0e4166;
-  background-image: linear-gradient(to bottom, rgba(14, 65, 102, 0.86), #0e4166);
+  background-color: #0a192f;
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;
 
-const Content = styled.div`
-  text-align: center;
-  padding: 20px;
-  padding-top: 0px;
-  max-width: 800px;
+const Canvas = styled.canvas`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+`;
+
+const GradientOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(10, 25, 47, 0.6) 0%,
+    rgba(10, 25, 47, 0.8) 40%,
+    rgba(10, 25, 47, 0.95) 80%
+  );
   z-index: 1;
 `;
 
-const ImageContainer = styled.div`
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0 auto 20px;
-  border: 5px solid white;
+const Content = styled.div`
+  max-width: 700px;
+  z-index: 2;
+  opacity: ${props => (props.isVisible ? 1 : 0)};
+  transform: ${props => (props.isVisible ? 'translateY(0)' : 'translateY(20px)')};
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  position: relative;
 `;
 
-const imageStyle = {
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-};
-
-const SVGContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  display: block;
-  background-color: #0e4166;
-  background-image: linear-gradient(to bottom, rgba(14, 65, 102, 0.86), #0e4166);
+const Greeting = styled.p`
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #64ffda;
+  font-family: 'Roboto Mono', monospace;
+  animation: ${fadeIn} 0.8s ease forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
 `;
 
-const AnimatedText = styled.div`
-  animation: ${fadeIn} 1.5s ease-out;
+const Name = styled.h1`
+  font-size: 72px;
+  font-weight: 800;
+  margin: 0 0 30px 0;
+  color: #e6f1ff;
+  animation: ${fadeIn} 0.8s ease forwards;
+  animation-delay: 0.8s;
+  opacity: 0;
+
+  @media (max-width: 768px) {
+    font-size: 48px;
+  }
 `;
 
-const Heading = styled.h2`
-  color: white;
-  font-size: 48px;
-  margin-top: 20px;
-`;
-
-const SubHeading = styled.p`
-  color: white;
-  font-size: 36px;
+const Description = styled.p`
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  max-width: 700px;
+  color: #8892b0;
+  animation: ${fadeIn} 0.8s ease forwards;
+  animation-delay: 1.0s;
+  opacity: 0;
 `;
 
 export default Home;

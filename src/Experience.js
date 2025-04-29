@@ -1,9 +1,10 @@
 import React from 'react';
-import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-import { FaCalendarAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 import 'react-vertical-timeline-component/style.min.css';
 import ciscoLogo from './experienceimages/cisco.png';
-import elLogo from './experienceimages/el2.png';
+import humanaLogo from './experienceimages/humana.png';
+import elLogo2 from './experienceimages/el3.jpg';
+import alclogo from './experienceimages/alc.png';
 import pythonIcon from './experienceimages/py.png';
 import rebel2 from './experienceimages/rebel2.jpeg';
 import gitIcon from './experienceimages/git copy.png';
@@ -19,14 +20,23 @@ import nextjs from './experienceimages/next-js copy.png';
 import apex from './experienceimages/apex.jpeg';
 import pandasIcon from './experienceimages/pandas.png';
 import numpyIcon from './experienceimages/numpy.webp';
-import adc from './experienceimages/adc.png'
 import skyvernIcon from './experienceimages/skyvern.png';
-import { useState } from 'react';
+import styled from 'styled-components';
 
 const experiences = [
     {
-        company: 'App Dev Club',
-        logo: adc,
+        company: 'Humana',
+        logo: humanaLogo,
+        title: 'Incoming Technology Intern',
+        date: 'Summer 2025',
+        description: [
+            'Excited to join Humana as a Technology Intern this summer where I will work on innovative projects at the intersection of healthcare and technology.',
+        ],
+        icons: [],
+    },
+    {
+        company: 'Alpha Intelligence Capital',
+        logo: alclogo,
         title: 'Full Stack Engineer',
         date: 'February 2025 ~ Present',
         description: [
@@ -42,7 +52,7 @@ const experiences = [
         date: 'October 2024 ~ Present',
         description: [
             'Building a custom data loader using Python to create an in-house dataset, enhancing data accessibility for projects.',
-            'Designing quantitative trading strategies to identify and optimize the most effective approach for the club’s portfolio.',
+            'Designing quantitative trading strategies to identify and optimize the most effective approach for the club\'s portfolio.',
             'Engineering advanced infrastructure to enhance the efficiency of trading strategies, aligning with market demands.',
         ],
         icons: [pythonIcon, pandasIcon, numpyIcon, gitIcon],
@@ -73,7 +83,7 @@ const experiences = [
     },
     {
         company: 'Eye Level',
-        logo: elLogo,
+        logo: elLogo2,
         title: 'Marketing/Business Intern',
         date: 'July 2022 - September 2022',
         description: [
@@ -98,153 +108,180 @@ const experiences = [
 
 const Experience = () => {
     return (
-        <div style={sectionStyle}>
-            <h2 style={headingStyle}>Experience</h2>
-            <VerticalTimeline>
-                {experiences.map((experience, index) => (
-                    <VerticalTimelineElement
-                        key={index}
-                        contentStyle={cardStyle}
-                        contentArrowStyle={{ borderRight: '7px solid #ddd' }}
-                        iconStyle={{ display: 'none' }}
-                        date={<CustomDate date={experience.date} />}
-                    >
-                        <div style={logoContainerStyle}>
-                            <img src={experience.logo} alt={`${experience.company} logo`} style={logoStyle} />
-                        </div>
-                        <h3 style={jobTitleStyle}>{experience.title}</h3>
-                        <h4 style={companyNameStyle}>{experience.company}</h4>
-                        <ul style={jobDescriptionStyle}>
-                            {experience.description.map((point, idx) => (
-                                <li key={idx}>{point}</li>
-                            ))}
-                        </ul>
-                        <div style={iconsContainerStyle}>
-                            {experience.icons.map((icon, idx) => (
-                                <img key={idx} src={icon} alt={`Skill ${idx}`} style={skillIconStyle} />
-                            ))}
-                        </div>
-                    </VerticalTimelineElement>
-                ))}
-            </VerticalTimeline>
-        </div>
+      <Section>
+        <ContentWrapper>
+          <Heading>Experience</Heading>
+  
+          <Timeline>
+            {experiences.map((exp, index) => (
+              <TimelineItem key={index}>
+                <TimelineDot />
+                <Card
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                  viewport={{ once: true }}
+                >
+                  <Logo
+                    src={exp.logo}
+                    alt={`${exp.company} logo`}
+                    isLarge={exp.company === 'Alpha Intelligence Capital' || exp.company === 'Chapter One'}
+                    />
+
+                  <JobTitle>{exp.title}</JobTitle>
+                  <Company>{exp.company}</Company>
+                  <Date>{exp.date}</Date>
+                  <BulletList>
+                    {exp.description.map((point, idx) => (
+                      <Bullet key={idx}>{point}</Bullet>
+                    ))}
+                  </BulletList>
+                  <TechStack>
+                    {exp.icons.map((icon, idx) => (
+                      <TechIcon key={idx} src={icon} alt="Tech" />
+                    ))}
+                  </TechStack>
+                </Card>
+              </TimelineItem>
+            ))}
+          </Timeline>
+        </ContentWrapper>
+      </Section>
     );
-};
+  };
+  
+  const Section = styled.div`
+    background-color: #0a192f;
+    padding: 100px 20px;
+    color: #e6f1ff;
+  `;
+  
+  const ContentWrapper = styled.div`
+    max-width: 1000px;
+    margin: 0 auto;
+  `;
+  
+  const Heading = styled.h2`
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: #e6f1ff;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: #64ffda;
+    }
+`;
+  
+  
+  const Timeline = styled.div`
+    position: relative;
+    margin: 0 auto;
+    padding-left: 20px;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: #1e3a5f;
+    }
+  `;
+  
+  const TimelineItem = styled.div`
+    position: relative;
+    margin-bottom: 50px;
+  `;
+  
+  const TimelineDot = styled.div`
+    position: absolute;
+    left: 11px;
+    width: 18px;
+    height: 18px;
+    background: #64ffda;
+    border-radius: 50%;
+    z-index: 1;
+  `;
+  
+  const Card = styled(motion.div)`
+    background: #112240;
+    border: 1px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 25px;
+    margin-left: 50px;
+    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+  `;
+  
+  const Logo = styled.img`
+  width: ${({ isLarge }) => (isLarge ? '75px' : '60px')};
+  height: ${({ isLarge }) => (isLarge ? '75px' : '60px')};
+  object-fit: contain;
+  margin-bottom: 10px;
+`;
 
-// Custom Date Component for styling
-const CustomDate = ({ date }) => {
-    const [isHovered, setIsHovered] = useState(false);
+  
+  const JobTitle = styled.h3`
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  `;
+  
+  const Company = styled.h4`
+    font-size: 18px;
+    color: #64ffda;
+    margin-bottom: 10px;
+  `;
+  
+  const Date = styled.p`
+    font-size: 14px;
+    color: #8892b0;
+    margin-bottom: 15px;
+  `;
+  
+  const BulletList = styled.ul`
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+`;
 
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
+const Bullet = styled.li`
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  color: #a8b2d1;
+  font-size: 15px;
 
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
+  &::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #64ffda;
+  }
+`;
 
-    const dateTextStyle = {
-        fontSize: '28px',
-        color: '#ffffff',
-        fontWeight: 'bold',
-        textShadow: isHovered
-            ? '0 0 5px #60a3d9, 0 0 15px #60a3d9, 0 0 25px #60a3d9' // Soft blue glow
-            : '2px 2px 4px rgba(0, 0, 0, 0.3)',
-        transition: 'text-shadow 0.4s ease, color 0.3s ease', // Smooth transition
-    };
-
-    return (
-        <div style={customDateContainerStyle}>
-            <FaCalendarAlt style={calendarIconStyle} />
-            <span
-                style={dateTextStyle}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-            >
-                {date}
-            </span>
-        </div>
-    );
-};
-
-const sectionStyle = {
-    padding: '60px 20px',
-    backgroundColor: '#87CEEB', // Light blue background
-};
-
-const headingStyle = {
-    color: '#f7f5f5', // White color for the header
-    textAlign: 'center',
-    fontSize: '40px',
-    marginBottom: '30px',
-};
-
-const cardStyle = {
-    backgroundColor: '#fff',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-    borderRadius: '8px',
-    padding: '20px',
-};
-
-const logoContainerStyle = {
-    textAlign: 'center',
-    marginBottom: '20px',
-};
-
-const logoStyle = {
-    maxWidth: '100px',
-    maxHeight: '100px',
-    objectFit: 'contain',
-};
-
-const jobTitleStyle = {
-    fontSize: '24px',
-    color: '#333',
-    marginBottom: '10px',
-};
-
-const companyNameStyle = {
-    fontSize: '18px',
-    color: '#666',
-    marginBottom: '10px',
-};
-
-const jobDescriptionStyle = {
-    fontSize: '16px',
-    color: '#444',
-    listStyleType: 'disc',
-    paddingLeft: '20px',
-};
-
-const iconsContainerStyle = {
-    display: 'flex',
-    marginTop: '10px',
-};
-
-const skillIconStyle = {
-    width: '30px',
-    height: '30px',
-    marginRight: '10px',
-};
-
-// Styles for the custom date container
-const customDateContainerStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '16px',
-    color: '#f7f5f5',  // Keeping the text color consistent
-    fontWeight: 'bold',
-    height: '50px',
-    marginLeft: '15px',
-    padding: '0 10px',
-};
-
-// Style for the calendar icon with a subtle rotation animation
-const calendarIconStyle = {
-    marginRight: '8px',
-    fontSize: '24px',  // Icon size
-    animation: 'rotate 5s linear infinite',  // Rotation animation
-};
-
-export default Experience;
+  
+  const TechStack = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  `;
+  
+  const TechIcon = styled.img`
+    width: 28px;
+    height: 28px;
+  `;
+  
+  export default Experience;
