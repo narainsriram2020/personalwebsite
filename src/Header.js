@@ -7,7 +7,6 @@ function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    let lastScrollPosition = window.scrollY;
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -32,7 +31,6 @@ function Header() {
       });
 
       setIsAtTop(scrollPosition === 0);
-      lastScrollPosition = scrollPosition;
     };
 
     window.addEventListener('scroll', handleScroll);
