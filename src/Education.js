@@ -66,6 +66,10 @@ function Education() {
                                 <SectionTitle>Campus Involvement</SectionTitle>
                                 <ClubGrid>
                                     <ClubItem>
+                                        <ClubName>App Dev</ClubName>
+                                        <ClubDescription>Aplha Intelligence Capital Project</ClubDescription>
+                                    </ClubItem>
+                                    <ClubItem>
                                         <ClubName>Apex Quant</ClubName>
                                         <ClubDescription>Quantitative Finance Club</ClubDescription>
                                     </ClubItem>
