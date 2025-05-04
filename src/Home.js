@@ -85,9 +85,8 @@ function Home() {
         <Greeting>Hi, my name is</Greeting>
         <Name>Narain Sriram.</Name>
         <Description>
-          I'm a sophomore Computer Science student at the University of Maryland,
-          specializing in Machine Learning. I focus on developing modern applications
-          and creating sleek, intuitive user experiences.
+          I'm a junior Computer Science and Math student at the University of Maryland,
+          specializing in Machine Learning.
         </Description>
       </Content>
     </Container>
