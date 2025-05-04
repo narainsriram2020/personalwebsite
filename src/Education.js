@@ -57,7 +57,8 @@ function Education() {
                                     <CourseItem>STAT 400: Applied Probability and Statistics I</CourseItem>
                                     <CourseItem>CMSC 330: Organization of Programming Languages</CourseItem>
                                     <CourseItem>CMSC 351: Algorithms</CourseItem>
-                                    <CourseItem>BMGT 355: Foundations of Marketing for Non Business Majors</CourseItem>
+                                    <CourseItem>BMIN 355: Foundations of Marketing</CourseItem>
+                                    <CourseItem>BMIN 395: Foundations of Management</CourseItem>
                                 </CourseGrid>
                             </DetailSection>
 
