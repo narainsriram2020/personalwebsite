@@ -33,7 +33,7 @@ function Projects() {
         {
             id: "canadian_options",
             name: 'CA Options Pricing',
-            tagline: "Boost company workflow with AI",
+            tagline: "Canadian Options Research",
             overview: 'CA Options Pricing is a financial modeling project focused on building robust options pricing tools for Canadian institutions. We applied classical models such as the Black-Scholes and the Binomial Tree method to Canadian financial datasets. Our main focus was in the Canadian banking sector. The goal is to provide replicable, scalable options pricing methodologies grounded in financial theory and real market behavior.',
             techDetails: 'The project structure is built around modular Jupyter notebooks and Python scripts. Data is managed using efficient parquet file storage formats and processed with Python’s pandas library. Special emphasis is placed on realistic parameter calibration and model validation against market data.',
             techStack: ['Python', 'Pandas', 'NumPy', 'Scipy', 'Matplotlib'],
