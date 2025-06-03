@@ -269,16 +269,25 @@ const SkillName = styled.h3`
     color: #e6f1ff;
 `;
 
-const getProficiencyColor = (proficiency) => {
-    switch (proficiency) {
-        case 'Advanced': return '#64ffda';      // teal
-        case 'Intermediate': return '#ffcb6b';  // amber
-        case 'Familiar': return '#c792ea';      // purple
-        default: return '#64ffda';
-    }
-};
+// const getProficiencyColor = (proficiency) => {
+//     switch (proficiency) {
+//         case 'Advanced': return '#64ffda';      // teal
+//         case 'Intermediate': return '#ffcb6b';  // amber
+//         case 'Familiar': return '#c792ea';      // purple
+//         default: return '#64ffda';
+//     }
+// };
 
-
+// const ProficiencyBadge = styled.span`
+//     display: inline-block;
+//     padding: 4px 10px;
+//     border-radius: 4px;
+//     font-size: 12px;
+//     font-weight: 600;
+//     background-color: ${props => `rgba(${hexToRgb(getProficiencyColor(props.proficiency))}, 0.15)`};
+//     color: ${props => getProficiencyColor(props.proficiency)};
+//     margin-bottom: 10px;
+// `;
 
 const Description = styled.p`
     font-size: 14px;
@@ -301,18 +310,18 @@ const UsageDescription = styled.p`
     margin-top: 5px;
 `;
 
-const hexToRgb = (hex) => {
-    let r = 0, g = 0, b = 0;
-    if (hex.length === 4) {
-        r = parseInt(hex[1] + hex[1], 16);
-        g = parseInt(hex[2] + hex[2], 16);
-        b = parseInt(hex[3] + hex[3], 16);
-    } else if (hex.length === 7) {
-        r = parseInt(hex[1] + hex[2], 16);
-        g = parseInt(hex[3] + hex[4], 16);
-        b = parseInt(hex[5] + hex[6], 16);
-    }
-    return `${r},${g},${b}`;
-};
+// const hexToRgb = (hex) => {
+//     let r = 0, g = 0, b = 0;
+//     if (hex.length === 4) {
+//         r = parseInt(hex[1] + hex[1], 16);
+//         g = parseInt(hex[2] + hex[2], 16);
+//         b = parseInt(hex[3] + hex[3], 16);
+//     } else if (hex.length === 7) {
+//         r = parseInt(hex[1] + hex[2], 16);
+//         g = parseInt(hex[3] + hex[4], 16);
+//         b = parseInt(hex[5] + hex[6], 16);
+//     }
+//     return `${r},${g},${b}`;
+// };
 
 export default Skills;
