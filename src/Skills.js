@@ -278,16 +278,7 @@ const getProficiencyColor = (proficiency) => {
     }
 };
 
-const ProficiencyBadge = styled.span`
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    background-color: ${props => `rgba(${hexToRgb(getProficiencyColor(props.proficiency))}, 0.15)`};
-    color: ${props => getProficiencyColor(props.proficiency)};
-    margin-bottom: 10px;
-`;
+
 
 const Description = styled.p`
     font-size: 14px;
