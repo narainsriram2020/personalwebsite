@@ -162,9 +162,9 @@ function Skills() {
                                 />
                             </LogoContainer>
                             <SkillName>{skill.name}</SkillName>
-                            <ProficiencyBadge proficiency={skill.proficiency}>
+                            {/* <ProficiencyBadge proficiency={skill.proficiency}>
                                 {skill.proficiency}
-                            </ProficiencyBadge>
+                            </ProficiencyBadge> */}
                             <Description>{skill.description}</Description>
                             <UsageHeading>How I've Used It:</UsageHeading>
                             <UsageDescription>{skill.used}</UsageDescription>
