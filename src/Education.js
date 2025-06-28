@@ -40,7 +40,7 @@ function Education() {
                                 <SchoolInfo>
                                     <SchoolName>University of Maryland – College Park</SchoolName>
                                     <Degree>B.S in Computer Science (Specialization in Data Science)</Degree>
-                                    <GradDate>Expected Graduation: December 2026</GradDate>
+                                    <GradDate>Expected Graduation: Spring 2027</GradDate>
                                     <Detail>Pursuing minor in Math and Business</Detail>
                                 </SchoolInfo>
                             </SchoolInfoContainer>
