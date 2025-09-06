@@ -23,7 +23,7 @@ import numpyIcon from './experienceimages/numpy.webp';
 import skyvernIcon from './experienceimages/skyvern.png';
 import umdcs from './experienceimages/umdcs.jpg';
 import salesforceIcon from './experienceimages/salesforce.png';
-import apexLogo from './experienceimages/apexlogo.png';
+import apexLogo from './experienceimages/apex.png';
 import mulesoftIcon from './experienceimages/mulesoft.png';
 import jsIcon from './experienceimages/js.png';
 import genesysIcon from './experienceimages/genesys.png';
@@ -41,7 +41,7 @@ const experiences = [
             'Integrated Google’s Agent Assist into the Salesforce call center platform, enabling real-time transcription and automated post-call summaries to boost agent efficiency and enhance customer experience through AI-powered insights',
             'Reduced agent handling time by 20% and contributed to an initiative projected to generate $35M/year'
         ],
-        icons: [],
+        icons: [salesforceIcon, genesysIcon, mulesoftIcon, jsIcon, apexLogo, pythonIcon],
     },
     {
       company: 'UMD Computer Sciecnce Department',
@@ -51,7 +51,7 @@ const experiences = [
       description: [
           'Working with professor Haizhao Yang to on spatio-temporal diffusion models for precipitation',
       ],
-      icons: [],
+      icons: [pythonIcon, pandasIcon, numpyIcon],
   },
     {
         company: 'Alpha Intelligence Capital',

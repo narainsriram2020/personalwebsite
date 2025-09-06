@@ -134,7 +134,7 @@ function Skills() {
             },
             {
                 name: 'Genesys',
-                logo: '/genesys.png',
+                logo: '/genesys.jpg',
                 description: 'Cloud-based customer experience and contact center platform',
                 used: 'Used Genesys in my Humana internship to enhance call center efficiency through automation and real-time support'
             },
@@ -154,7 +154,7 @@ function Skills() {
             },
             {
                 name: 'Firebase',
-                logo: '/fb.png',
+                logo: '/firebase.png',
                 description: 'Google\'s platform for building and scaling mobile and web applications',
                 used: 'Leveraged Firebase for authentication, Firestore database, and real-time data sync in app projects'
             },
