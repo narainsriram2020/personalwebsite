@@ -11,7 +11,7 @@ function Header() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
 
-      const sections = ['home', 'skills', 'experience', 'projects', 'education', 'volunteering', 'contact'];
+      const sections = ['home', 'experience', 'skills', 'projects', 'education', 'volunteering', 'contact'];
 
       sections.forEach((section) => {
         const element = document.getElementById(section);
@@ -81,8 +81,8 @@ function Header() {
           </NavToggle>
           <NavLinks isMobileMenuOpen={isMobileMenuOpen}>
             <NavLink active={activeSection === 'home'} onClick={() => handleNavClick('home')}>Home</NavLink>
-            <NavLink active={activeSection === 'skills'} onClick={() => handleNavClick('skills')}>Skills</NavLink>
             <NavLink active={activeSection === 'experience'} onClick={() => handleNavClick('experience')}>Experience</NavLink>
+            <NavLink active={activeSection === 'skills'} onClick={() => handleNavClick('skills')}>Skills</NavLink>
             <NavLink active={activeSection === 'projects'} onClick={() => handleNavClick('projects')}>Projects</NavLink>
             <NavLink active={activeSection === 'education'} onClick={() => handleNavClick('education')}>Education</NavLink>
             <NavLink active={activeSection === 'volunteering'} onClick={() => handleNavClick('volunteering')}>Volunteering</NavLink>
@@ -109,9 +109,9 @@ const StyledIsland = ({ activeSection, handleNavClick }) => (
     <IslandNavLinks>
       <IslandNavItem active={activeSection === 'home'} onClick={() => handleNavClick('home')}>Home</IslandNavItem>
       <Divider />
-      <IslandNavItem active={activeSection === 'skills'} onClick={() => handleNavClick('skills')}>Skills</IslandNavItem>
-      <Divider />
       <IslandNavItem active={activeSection === 'experience'} onClick={() => handleNavClick('experience')}>Experience</IslandNavItem>
+      <Divider />
+      <IslandNavItem active={activeSection === 'skills'} onClick={() => handleNavClick('skills')}>Skills</IslandNavItem>
       <Divider />
       <IslandNavItem active={activeSection === 'projects'} onClick={() => handleNavClick('projects')}>Projects</IslandNavItem>
       <Divider />

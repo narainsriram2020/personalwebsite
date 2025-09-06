@@ -154,8 +154,8 @@ const App = () => {
       <MainContainer loaded={loaded}>
         <Header />
         <Section id="home" delay="0.2s"><Home /></Section>
-        <Section id="skills" delay="0.3s"><Skills /></Section>
         <Section id="experience" delay="0.4s"><Experience /></Section>
+        <Section id="skills" delay="0.3s"><Skills /></Section>
         <Section id="projects" delay="0.5s"><Projects /></Section>
         <Section id="education" delay="0.6s"><Education /></Section>
         <Section id="volunteering" delay="0.7s"><Volunteering /></Section>
