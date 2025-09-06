@@ -144,6 +144,62 @@ function Skills() {
             //proficiency: 'Advanced',
             used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
         },
+        {
+            name: 'Rust',
+            logo: '/office.png',
+            description: 'Productivity software for documents, spreadsheets, and presentations',
+            //proficiency: 'Advanced',
+            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+        },
+        {
+            name: 'OCaml',
+            logo: '/office.png',
+            description: 'Productivity software for documents, spreadsheets, and presentations',
+            //proficiency: 'Advanced',
+            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+        },
+        {
+            name: 'Rust',
+            logo: '/office.png',
+            description: 'Productivity software for documents, spreadsheets, and presentations',
+            //proficiency: 'Advanced',
+            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+        },
+        {
+            name: 'Apex',
+            logo: '/office.png',
+            description: 'Productivity software for documents, spreadsheets, and presentations',
+            //proficiency: 'Advanced',
+            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+        },
+        {
+            name: 'Salesforce',
+            logo: '/office.png',
+            description: 'Productivity software for documents, spreadsheets, and presentations',
+            //proficiency: 'Advanced',
+            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+        },
+        {
+            name: 'Genesys',
+            logo: '/office.png',
+            description: 'Productivity software for documents, spreadsheets, and presentations',
+            //proficiency: 'Advanced',
+            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+        },
+        {
+            name: 'MuleSoft',
+            logo: '/office.png',
+            description: 'Productivity software for documents, spreadsheets, and presentations',
+            //proficiency: 'Advanced',
+            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+        },
+        {
+            name: 'Pnadas',
+            logo: '/office.png',
+            description: 'Productivity software for documents, spreadsheets, and presentations',
+            //proficiency: 'Advanced',
+            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+        },
     ];
 
     return (
