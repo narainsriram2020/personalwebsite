@@ -21,6 +21,12 @@ import apex from './experienceimages/apex.jpeg';
 import pandasIcon from './experienceimages/pandas.png';
 import numpyIcon from './experienceimages/numpy.webp';
 import skyvernIcon from './experienceimages/skyvern.png';
+import umdcs from './experienceimages/umdcs.jpg';
+import salesforceIcon from './experienceimages/salesforce.png';
+import apexLogo from './experienceimages/apexlogo.png';
+import mulesoftIcon from './experienceimages/mulesoft.png';
+import jsIcon from './experienceimages/js.png';
+import genesysIcon from './experienceimages/genesys.png';
 import styled from 'styled-components';
 
 const experiences = [
@@ -37,6 +43,16 @@ const experiences = [
         ],
         icons: [],
     },
+    {
+      company: 'UMD Computer Sciecnce Department',
+      logo: umdcs,
+      title: 'Machine Learning Research Assistant',
+      date: 'August 2025 ~ Present',
+      description: [
+          'Working with professor Haizhao Yang to on spatio-temporal diffusion models for precipitation',
+      ],
+      icons: [],
+  },
     {
         company: 'Alpha Intelligence Capital',
         logo: alclogo,
