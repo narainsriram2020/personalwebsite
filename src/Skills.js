@@ -147,58 +147,58 @@ function Skills() {
         {
             name: 'Rust',
             logo: '/office.png',
-            description: 'Productivity software for documents, spreadsheets, and presentations',
+            description: 'Systems programming language focused on safety, speed, and concurrency',
             //proficiency: 'Advanced',
-            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+            used: 'Utilized Rust to complete multiple school projects'
         },
         {
             name: 'OCaml',
             logo: '/office.png',
-            description: 'Productivity software for documents, spreadsheets, and presentations',
+            description: 'Functional programming language with strong static typing and pattern matching',
             //proficiency: 'Advanced',
-            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
-        },
-        {
-            name: 'Rust',
-            logo: '/office.png',
-            description: 'Productivity software for documents, spreadsheets, and presentations',
-            //proficiency: 'Advanced',
-            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+            used: 'Utilized OCaml to complete multiple school projects'
         },
         {
             name: 'Apex',
             logo: '/office.png',
-            description: 'Productivity software for documents, spreadsheets, and presentations',
+            description: 'Strongly typed, object-oriented programming language for Salesforce development',
             //proficiency: 'Advanced',
-            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+            used: 'Used Apex during my internship at Humana'
         },
         {
             name: 'Salesforce',
             logo: '/office.png',
-            description: 'Productivity software for documents, spreadsheets, and presentations',
+            description: 'Customer Relationship Management (CRM) platform with tools for sales, service, and automation',
             //proficiency: 'Advanced',
-            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+            used: 'Worked on Salesforce CRM during my Humana internship, integrating Google Agent Assist and optimizing platform performance'
         },
         {
             name: 'Genesys',
             logo: '/office.png',
-            description: 'Productivity software for documents, spreadsheets, and presentations',
+            description: 'Cloud-based customer experience and contact center platform',
             //proficiency: 'Advanced',
-            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+            used: 'Used Genesys in my Humana internship to enhance call center efficiency through automation and real-time support'
         },
         {
             name: 'MuleSoft',
             logo: '/office.png',
-            description: 'Productivity software for documents, spreadsheets, and presentations',
+            description: 'Integration platform for connecting applications, data, and devices',
             //proficiency: 'Advanced',
-            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+            used: 'Utilized MuleSoft to integrate APIs and backend systems as part of my Humana internship'
         },
         {
-            name: 'Pnadas',
+            name: 'MongoDB',
             logo: '/office.png',
-            description: 'Productivity software for documents, spreadsheets, and presentations',
+            description: 'NoSQL database program that uses JSON-like documents with dynamic schemas',
             //proficiency: 'Advanced',
-            used: 'Proficient in Word, Excel, and PowerPoint for document creation, data analysis, and presentations'
+            used: 'Built numerous projects using MongoDB as the primary database'
+        },
+        {
+            name: 'Firebase',
+            logo: '/office.png',
+            description: 'Google’s platform for building and scaling mobile and web applications',
+            //proficiency: 'Advanced',
+            used: 'Leveraged Firebase for authentication, Firestore database, and real-time data sync in app projects'
         },
     ];
 
