@@ -27,10 +27,13 @@ const experiences = [
     {
         company: 'Humana',
         logo: humanaLogo,
-        title: 'Incoming Technology Intern',
-        date: 'Summer 2025',
+        title: 'Software Engineering Intern',
+        date: 'May 2025 ~ Present',
         description: [
-            'Excited to join Humana as a Technology Intern this summer where I will work on innovative projects at the intersection of healthcare and technology.',
+            'Working in the CRM team utilizing tools like Salesforce, Genesys, and MuleSoft to build and integrate robust solutions that streamline customer service processes',
+            'Optimized DML operations and overall code efficiency in the Humana pharmacy application, reducing processing time by 30%, resolving governor limit exceptions, and enhancing performance for 2,000,000+ daily users',
+            'Integrated Google’s Agent Assist into the Salesforce call center platform, enabling real-time transcription and automated post-call summaries to boost agent efficiency and enhance customer experience through AI-powered insights',
+            'Reduced agent handling time by 20% and contributed to an initiative projected to generate $35M/year'
         ],
         icons: [],
     },
