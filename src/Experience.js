@@ -49,7 +49,8 @@ const experiences = [
       title: 'Machine Learning Research Assistant',
       date: 'August 2025 ~ Present',
       description: [
-          'Working with professor Haizhao Yang to on spatio-temporal diffusion models for precipitation',
+          'Conducting research with Prof. Haizhao Yang on diffusion-based generative models for spatiotemporal downscaling of precipitation',
+          'Developing and evaluating deep learning pipelines on global climate datasets, FV3GFS, to improve fine-scale rainfall prediction and capture extreme events'
       ],
       icons: [pythonIcon, pandasIcon, numpyIcon],
   },
