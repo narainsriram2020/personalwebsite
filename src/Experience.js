@@ -58,7 +58,7 @@ const experiences = [
         company: 'Alpha Intelligence Capital',
         logo: alclogo,
         title: 'Full Stack Engineer',
-        date: 'February 2025 ~ Present',
+        date: 'February 2025 ~ April 2025',
         description: [
             'Working with Angel Investor Zeki Mokhtarzada and the UMD Hatchery Program to develop an advanced automation tool using Skyvern AI that streamlines document retrieval and processing',
             'Utilizing LLMs and implementing a RAG system to build an intelligent chat bot tailored for financial institutions, enhancing client interactions and data accessibility'
