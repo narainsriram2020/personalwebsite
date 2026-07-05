@@ -1,307 +1,374 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import 'react-vertical-timeline-component/style.min.css';
-import ciscoLogo from './experienceimages/cisco.png';
-import humanaLogo from './experienceimages/humana.png';
-import elLogo2 from './experienceimages/el3.jpg';
-import alclogo from './experienceimages/alc.png';
-import pythonIcon from './experienceimages/py.png';
-import rebel2 from './experienceimages/rebel2.jpeg';
-import gitIcon from './experienceimages/git copy.png';
-import swiftIcon from './experienceimages/swift1.png';
-import figmaIcon from './experienceimages/fig.png';
-import djangoIcon from './experienceimages/dj.png';
-import rnIcon from './experienceimages/rn.png';
-import SQLIcon from './experienceimages/sql.png';
-import gcIcon from './experienceimages/gc.png';
-import businessIcon from './experienceimages/business.png';
-import chapone from './experienceimages/chapone.png';
-import nextjs from './experienceimages/next-js copy.png';
-import apex from './experienceimages/apex.jpeg';
-import pandasIcon from './experienceimages/pandas.png';
-import numpyIcon from './experienceimages/numpy.webp';
-import skyvernIcon from './experienceimages/skyvern.png';
-import umdcs from './experienceimages/umdcs.jpg';
-import salesforceIcon from './experienceimages/salesforce.png';
-import apexLogo from './experienceimages/apex.png';
-import mulesoftIcon from './experienceimages/mulesoft.png';
-import jsIcon from './experienceimages/js.png';
-import genesysIcon from './experienceimages/genesys.png';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
+import SectionHeading from './SectionHeading';
+
+// Company logos
+import bnyLogo from './experienceimages/bny.png';
+import humanaLogo from './experienceimages/humana.png';
+import umdLogo from './experienceimages/umdcs.jpg';
+import alcLogo from './experienceimages/alc.png';
+import apexLogo from './experienceimages/apex.jpeg';
+import chapOneLogo from './experienceimages/chapone.png';
+import rebelLogo from './experienceimages/rebel.png';
+import eyeLevelLogo from './experienceimages/eyelevel.png';
+import ciscoLogo from './experienceimages/cisco.svg';
 
 const experiences = [
-    {
-        company: 'Humana',
-        logo: humanaLogo,
-        title: 'Software Engineering Intern',
-        date: 'May 2025 ~ Present',
-        description: [
-            'Working in the CRM team utilizing tools like Salesforce, Genesys, and MuleSoft to build and integrate robust solutions that streamline customer service processes',
-            'Optimized DML operations and overall code efficiency in the Humana pharmacy application, reducing processing time by 30%, resolving governor limit exceptions, and enhancing performance for 2,000,000+ daily users',
-            'Integrated Google’s Agent Assist into the Salesforce call center platform, enabling real-time transcription and automated post-call summaries to boost agent efficiency and enhance customer experience through AI-powered insights',
-            'Reduced agent handling time by 20% and contributed to an initiative projected to generate $35M/year'
-        ],
-        icons: [salesforceIcon, genesysIcon, mulesoftIcon, jsIcon, apexLogo, pythonIcon],
-    },
-    {
-      company: 'UMD Computer Sciecnce Department',
-      logo: umdcs,
-      title: 'Machine Learning Research Assistant',
-      date: 'August 2025 ~ Present',
-      description: [
-          'Conducting research with Prof. Haizhao Yang on diffusion-based generative models for spatiotemporal downscaling of precipitation',
-          'Developing and evaluating deep learning pipelines on global climate datasets, FV3GFS, to improve fine-scale rainfall prediction and capture extreme events'
-      ],
-      icons: [pythonIcon, pandasIcon, numpyIcon],
+  {
+    company: 'BNY',
+    logo: bnyLogo,
+    title: 'Software Engineering Intern',
+    date: 'Jun 2026 — Present',
+    points: [
+      "Software Engineering Intern in BNY's Summer 2026 program.",
+    ],
+    tech: [],
   },
-    {
-        company: 'Alpha Intelligence Capital',
-        logo: alclogo,
-        title: 'Full Stack Engineer',
-        date: 'February 2025 ~ April 2025',
-        description: [
-            'Working with Angel Investor Zeki Mokhtarzada and the UMD Hatchery Program to develop an advanced automation tool using Skyvern AI that streamlines document retrieval and processing',
-            'Utilizing LLMs and implementing a RAG system to build an intelligent chat bot tailored for financial institutions, enhancing client interactions and data accessibility'
-        ],
-        icons: [pythonIcon, skyvernIcon, gitIcon],
-    },
-    {
-        company: 'Apex Quant',
-        logo: apex,
-        title: 'Junior Quantitative Analyst',
-        date: 'October 2024 ~ Present',
-        description: [
-            'Building a custom data loader using Python to create an in-house dataset, enhancing data accessibility for projects.',
-            'Designing quantitative trading strategies to identify and optimize the most effective approach for the club\'s portfolio.',
-            'Engineering advanced infrastructure to enhance the efficiency of trading strategies, aligning with market demands.',
-        ],
-        icons: [pythonIcon, pandasIcon, numpyIcon, gitIcon],
-    },
-    {
-        company: 'Chapter One',
-        logo: chapone,
-        title: 'Software Engineering Internship',
-        date: 'September 2024 - December 2024',
-        description: [
-            'Leveraged Next.js and the OpenAI API to seamlessly integrate Twilio, designing and implementing automated emailing and calling systems.',
-            'Engaged in full-stack development tasks, contributing to both client-side and server-side code.',
-            'Worked directly with clients to understand their business needs, providing tailored solutions that aligned with their goals.',
-        ],
-        icons: [nextjs, pythonIcon, SQLIcon, gitIcon],
-    },
-    {
-        company: 'weRebel',
-        logo: rebel2,
-        title: 'Software Engineering Internship',
-        date: 'May 2024 - August 2024',
-        description: [
-            'Collaborated with a team to design, develop, and deploy features for the Rebel Artist Platforms, ensuring a seamless user experience.',
-            'Built user interfaces using JavaScript React Framework, creating responsive and interactive web apps.',
-            'Developed and maintained backend services with Python Django Framework, focusing on scalability and security.',
-        ],
-        icons: [pythonIcon, djangoIcon, rnIcon, SQLIcon, gcIcon, figmaIcon, gitIcon],
-    },
-    {
-        company: 'Eye Level',
-        logo: elLogo2,
-        title: 'Marketing/Business Intern',
-        date: 'July 2022 - September 2022',
-        description: [
-            'Led initiatives for the annual event coordination and devised marketing strategies for two locations with 250 students.',
-            'Spearheaded marketing and outreach efforts for two Eye Level locations, driving student enrollment and brand visibility.',
-        ],
-        icons: [businessIcon],
-    },
-    {
-        company: 'Cisco Systems',
-        logo: ciscoLogo,
-        title: 'Cisco Summer Internship',
-        date: 'June 2022 - July 2022',
-        description: [
-            'Completed a rigorous program, gaining valuable insights into the field of computer science and enhancing personal skills.',
-            'Developed a mobile application using Xcode, showcasing proficiency in iOS app development.',
-            'Collaborated with cross-functional teams to deliver innovative solutions and meet project objectives.',
-        ],
-        icons: [pythonIcon, swiftIcon, figmaIcon, gitIcon],
-    },
+  {
+    company: 'Humana',
+    logo: humanaLogo,
+    title: 'Software Engineering Intern',
+    date: 'May 2025 — Dec 2025',
+    points: [
+      'Building on the CRM team with Salesforce, Genesys, and MuleSoft to streamline customer-service workflows.',
+      'Optimized DML operations in the pharmacy application — cutting processing time 30%, resolving governor-limit exceptions, and improving performance for 2,000,000+ daily users.',
+      'Integrated Google Agent Assist into the Salesforce call center for real-time transcription and automated post-call summaries.',
+      'Reduced agent handling time 20%; contributed to an initiative projected to generate $35M/year.',
+    ],
+    tech: ['Salesforce', 'Apex', 'Genesys', 'MuleSoft', 'JavaScript', 'Python'],
+  },
+  {
+    company: 'UMD Computer Science',
+    logo: umdLogo,
+    title: 'Machine Learning Research Assistant',
+    date: 'Aug 2025 — Present',
+    points: [
+      'Researching diffusion-based generative models for spatiotemporal downscaling of precipitation with Prof. Haizhao Yang.',
+      'Building and evaluating deep-learning pipelines on global climate datasets (FV3GFS) to improve fine-scale rainfall prediction and capture extreme events.',
+    ],
+    tech: ['Python', 'Pandas', 'NumPy'],
+  },
+  {
+    company: 'Alpha Intelligence Capital',
+    logo: alcLogo,
+    logoDark: true,
+    title: 'Full Stack Engineer',
+    date: 'Feb 2025 — Apr 2025',
+    points: [
+      'Worked with angel investor Zeki Mokhtarzada and the UMD Hatchery to build an automation tool on Skyvern AI that streamlines document retrieval and processing.',
+      'Built an LLM-powered RAG chatbot tailored for financial institutions, improving client interactions and data accessibility.',
+    ],
+    tech: ['Python', 'Skyvern', 'Git'],
+  },
+  {
+    company: 'Apex Quant',
+    logo: apexLogo,
+    title: 'Junior Quantitative Analyst',
+    date: 'Oct 2024 — Present',
+    points: [
+      'Built a custom Python data loader to create an in-house dataset, improving data accessibility across projects.',
+      "Designed and back-tested quantitative trading strategies to optimize the approach for the club's portfolio.",
+      'Engineered infrastructure to improve the efficiency of trading strategies in line with market demands.',
+    ],
+    tech: ['Python', 'Pandas', 'NumPy', 'Git'],
+  },
+  {
+    company: 'Chapter One',
+    logo: chapOneLogo,
+    title: 'Software Engineering Intern',
+    date: 'Sep 2024 — Dec 2024',
+    points: [
+      'Leveraged Next.js and the OpenAI API to integrate Twilio, designing automated emailing and calling systems.',
+      'Contributed across the stack on both client- and server-side code.',
+      'Worked directly with clients to translate business needs into tailored solutions.',
+    ],
+    tech: ['Next.js', 'Python', 'SQL', 'Git'],
+  },
+  {
+    company: 'weRebel',
+    logo: rebelLogo,
+    logoDark: true,
+    title: 'Software Engineering Intern',
+    date: 'May 2024 — Aug 2024',
+    points: [
+      'Designed, built, and deployed features for the Rebel Artist Platforms with a focus on a seamless user experience.',
+      'Built responsive, interactive interfaces in React.',
+      'Developed and maintained Python/Django backend services with an emphasis on scalability and security.',
+    ],
+    tech: ['Python', 'Django', 'React', 'SQL', 'GCP', 'Figma'],
+  },
+  {
+    company: 'Eye Level',
+    logo: eyeLevelLogo,
+    title: 'Marketing / Business Intern',
+    date: 'Jul 2022 — Sep 2022',
+    points: [
+      'Led annual event coordination and devised marketing strategies for two locations serving 250 students.',
+      'Spearheaded outreach that drove student enrollment and brand visibility.',
+    ],
+    tech: [],
+  },
+  {
+    company: 'Cisco Systems',
+    logo: ciscoLogo,
+    logoDark: true,
+    title: 'Summer Intern',
+    date: 'Jun 2022 — Jul 2022',
+    points: [
+      'Completed a rigorous program covering computer-science fundamentals and professional development.',
+      'Built a mobile application in Xcode, demonstrating iOS development skills.',
+      'Collaborated with cross-functional teams to deliver solutions and meet project objectives.',
+    ],
+    tech: ['Python', 'Swift', 'Figma', 'Git'],
+  },
 ];
 
+const hideOnError = (e) => {
+  e.currentTarget.style.display = 'none';
+};
+
 const Experience = () => {
-    return (
-      <Section>
-        <ContentWrapper>
-          <Heading>Experience</Heading>
-  
-          <Timeline>
-            {experiences.map((exp, index) => (
-              <TimelineItem key={index}>
-                <TimelineDot />
-                <Card
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: 'easeOut' }}
-                  viewport={{ once: true }}
-                >
-                  <Logo
-                    src={exp.logo}
-                    alt={`${exp.company} logo`}
-                    isLarge={exp.company === 'Alpha Intelligence Capital' || exp.company === 'Chapter One'}
-                    />
+  const [openIdx, setOpenIdx] = useState(0);
 
-                  <JobTitle>{exp.title}</JobTitle>
-                  <Company>{exp.company}</Company>
-                  <Date>{exp.date}</Date>
-                  <BulletList>
-                    {exp.description.map((point, idx) => (
-                      <Bullet key={idx}>{point}</Bullet>
-                    ))}
-                  </BulletList>
-                  <TechStack>
-                    {exp.icons.map((icon, idx) => (
-                      <TechIcon key={idx} src={icon} alt="Tech" />
-                    ))}
-                  </TechStack>
-                </Card>
-              </TimelineItem>
-            ))}
-          </Timeline>
-        </ContentWrapper>
-      </Section>
-    );
-  };
-  
-  const Section = styled.div`
-    background-color: #0a192f;
-    padding: 100px 20px;
-    color: #e6f1ff;
-  `;
-  
-  const ContentWrapper = styled.div`
-    max-width: 1000px;
-    margin: 0 auto;
-  `;
-  
-  const Heading = styled.h2`
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 60px;
-    color: #e6f1ff;
-    text-align: center;
-    position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    &:after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background-color: #64ffda;
-    }
-`;
-  
-  
-  const Timeline = styled.div`
-    position: relative;
-    margin: 0 auto;
-    padding-left: 20px;
-    &:before {
-      content: '';
-      position: absolute;
-      left: 20px;
-      top: 0;
-      width: 2px;
-      height: 100%;
-      background: #1e3a5f;
-    }
-  `;
-  
-  const TimelineItem = styled.div`
-    position: relative;
-    margin-bottom: 50px;
-  `;
-  
-  const TimelineDot = styled.div`
-    position: absolute;
-    left: 11px;
-    width: 18px;
-    height: 18px;
-    background: #64ffda;
-    border-radius: 50%;
-    z-index: 1;
-  `;
-  
-  const Card = styled(motion.div)`
-    background: #112240;
-    border: 1px solid #1e3a5f;
-    border-radius: 10px;
-    padding: 25px;
-    margin-left: 50px;
-    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
-  `;
-  
-  const Logo = styled.img`
-  width: ${({ isLarge }) => (isLarge ? '75px' : '60px')};
-  height: ${({ isLarge }) => (isLarge ? '75px' : '60px')};
-  object-fit: contain;
-  margin-bottom: 10px;
+  const toggle = (i) => setOpenIdx((cur) => (cur === i ? null : i));
+
+  return (
+    <Section>
+      <Wrapper>
+        <SectionHeading index="01" title="Experience" />
+
+        <List>
+          {experiences.map((exp, i) => {
+            const isOpen = openIdx === i;
+            return (
+              <Row
+                key={exp.company}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: '-40px' }}
+              >
+                <RowButton onClick={() => toggle(i)} aria-expanded={isOpen}>
+                  <Index $open={isOpen}>{String(i + 1).padStart(2, '0')}</Index>
+                  <Company $open={isOpen}>{exp.company}</Company>
+                  <Meta>
+                    <Role>{exp.title}</Role>
+                    <When>{exp.date}</When>
+                  </Meta>
+                  <Plus $open={isOpen} aria-hidden>+</Plus>
+                </RowButton>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <Details
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <DetailsInner>
+                        <Logo
+                          src={exp.logo}
+                          alt={`${exp.company} logo`}
+                          loading="lazy"
+                          onError={hideOnError}
+                          $dark={exp.logoDark}
+                        />
+                        <div>
+                          <MobileMeta>{exp.title} · {exp.date}</MobileMeta>
+                          <Points>
+                            {exp.points.map((point, j) => (
+                              <Point key={j}>{point}</Point>
+                            ))}
+                          </Points>
+                          {exp.tech.length > 0 && (
+                            <Tech>{exp.tech.join(' · ')}</Tech>
+                          )}
+                        </div>
+                      </DetailsInner>
+                    </Details>
+                  )}
+                </AnimatePresence>
+              </Row>
+            );
+          })}
+        </List>
+      </Wrapper>
+    </Section>
+  );
+};
+
+const Section = styled.div`
+  padding: 120px 0;
+  background: transparent;
 `;
 
-  
-  const JobTitle = styled.h3`
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 5px;
-  `;
-  
-  const Company = styled.h4`
-    font-size: 18px;
-    color: #64ffda;
-    margin-bottom: 10px;
-  `;
-  
-  const Date = styled.p`
-    font-size: 14px;
-    color: #8892b0;
-    margin-bottom: 15px;
-  `;
-  
-  const BulletList = styled.ul`
-  list-style: none;
-  padding-left: 0;
-  margin-left: 0;
+const Wrapper = styled.div`
+  max-width: ${({ theme }) => theme.maxWidth};
+  margin: 0 auto;
+  padding: 0 32px;
+  @media (max-width: 768px) { padding: 0 20px; }
 `;
 
-const Bullet = styled.li`
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 10px;
-  color: #a8b2d1;
-  font-size: 15px;
+const List = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.color.line};
+`;
 
-  &::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #64ffda;
+const Row = styled(motion.div)`
+  border-top: 1px solid ${({ theme }) => theme.color.line};
+`;
+
+const RowButton = styled.button`
+  display: grid;
+  grid-template-columns: 52px 1fr auto 40px;
+  align-items: baseline;
+  gap: 20px;
+  width: 100%;
+  padding: 26px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 36px 1fr 28px;
+    gap: 12px;
+    padding: 20px 0;
   }
 `;
 
-  
-  const TechStack = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-  `;
-  
-  const TechIcon = styled.img`
-    width: 28px;
-    height: 28px;
-  `;
-  
-  export default Experience;
+const Index = styled.span`
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 13.5px;
+  letter-spacing: 0.06em;
+  color: ${({ $open, theme }) => ($open ? theme.color.accentSky : theme.color.muted)};
+  transition: color 0.3s ease;
+`;
+
+const Company = styled.span`
+  font-family: ${({ theme }) => theme.font.display};
+  font-weight: 500;
+  font-size: clamp(24px, 3.6vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: ${({ $open, theme }) => ($open ? theme.color.ink : theme.color.inkSoft)};
+  transition: color 0.3s ease, transform 0.35s ease;
+
+  ${RowButton}:hover & {
+    color: ${({ theme }) => theme.color.ink};
+    transform: translateX(6px);
+  }
+`;
+
+const Meta = styled.span`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+
+  @media (max-width: 768px) { display: none; }
+`;
+
+const Role = styled.span`
+  font-size: 14px;
+  color: ${({ theme }) => theme.color.muted};
+`;
+
+const When = styled.span`
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: ${({ theme }) => theme.color.muted};
+`;
+
+const Plus = styled.span`
+  justify-self: end;
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+  color: ${({ $open, theme }) => ($open ? theme.color.accent : theme.color.muted)};
+  transform: rotate(${({ $open }) => ($open ? '45deg' : '0deg')});
+  transform-origin: center;
+  transition: transform 0.35s ease, color 0.3s ease;
+`;
+
+const Details = styled(motion.div)`
+  overflow: hidden;
+`;
+
+const DetailsInner = styled.div`
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 20px;
+  padding: 4px 0 34px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 0 0 26px;
+  }
+`;
+
+const Logo = styled.img`
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  background: ${({ $dark, theme }) => ($dark ? theme.color.bgInset : '#F2F5FA')};
+  border: 1px solid ${({ $dark, theme }) => ($dark ? theme.color.lineStrong : 'transparent')};
+  border-radius: 12px;
+  padding: 8px;
+  margin-top: 2px;
+
+  @media (max-width: 768px) { width: 46px; height: 46px; }
+`;
+
+const Points = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 720px;
+`;
+
+const Point = styled.li`
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: ${({ theme }) => theme.color.inkSoft};
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.color.accent};
+  }
+`;
+
+const Tech = styled.div`
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: ${({ theme }) => theme.color.accentSky};
+  margin-top: 16px;
+`;
+
+const MobileMeta = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    font-family: ${({ theme }) => theme.font.mono};
+    font-size: 12px;
+    color: ${({ theme }) => theme.color.muted};
+    margin-bottom: 12px;
+  }
+`;
+
+export default Experience;

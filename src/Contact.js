@@ -1,179 +1,287 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { FaLinkedin, FaEnvelope, FaDev, FaInstagram, FaGithub } from 'react-icons/fa';
+
+const EMAIL = 'narainsriram@gmail.com';
+
+const elsewhere = [
+  { name: 'GitHub', link: 'https://github.com/narainsriram2020' },
+  { name: 'LinkedIn', link: 'https://www.linkedin.com/in/narainsriram/' },
+  { name: 'Devpost', link: 'https://devpost.com/narainsriram' },
+  { name: 'Instagram', link: 'https://www.instagram.com/narainsriram/' },
+];
 
 const Contact = () => {
-  const canvasRef = useRef(null);
-  const [visible, setVisible] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 300);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, '#64ffda');
-    gradient.addColorStop(0.5, '#0aafff');
-    gradient.addColorStop(1, '#c792ea');
-
-    let t = 0;
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0a192f';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.beginPath();
-      for (let i = 0; i <= canvas.width; i++) {
-        const y = Math.sin(i * 0.01 + t) * 30 + Math.sin(i * 0.02 + t * 1.5) * 20 + canvas.height / 2;
-        if (i === 0) {
-          ctx.moveTo(i, y);
-        } else {
-          ctx.lineTo(i, y);
-        }
-      }
-      ctx.strokeStyle = gradient;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      t += 0.01;
-      requestAnimationFrame(animate);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // clipboard unavailable — the mailto link still works
     }
+  };
 
-    animate();
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const contacts = [
-    { name: 'LinkedIn', icon: <FaLinkedin />, link: 'https://www.linkedin.com/in/narainsriram/', color: '#0A66C2' },
-    { name: 'Instagram', icon: <FaInstagram />, link: 'https://www.instagram.com/narainsriram/', color: '#E1306C' },
-    { name: 'Devpost', icon: <FaDev />, link: 'https://devpost.com/narainsriram', color: '#003E54' },
-    { name: 'Email', icon: <FaEnvelope />, link: 'mailto:narainsriram@gmail.com', color: '#EA4335' },
-    { name: 'GitHub', icon: <FaGithub />, link: 'https://github.com/narainsriram2020', color: '#24292E' },
-  ];
+  const backToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <SectionContainer>
-      <Canvas ref={canvasRef} />
-      <ContentWrapper visible={visible}>
-        <Heading>Let's Connect</Heading>
-        <SocialRow>
-          {contacts.map((contact, index) => (
-            <SocialLink
-              key={index}
-              href={contact.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              color={contact.color}
-            >
-              <IconWrapper>{contact.icon}</IconWrapper>
-              <SocialName>{contact.name}</SocialName>
-            </SocialLink>
-          ))}
-        </SocialRow>
-        <Footer>Designed & Built by Narain Sriram &copy; {new Date().getFullYear()}</Footer>
-      </ContentWrapper>
-    </SectionContainer>
+    <FooterSection>
+      <Wrapper>
+        <Top
+          initial={{ opacity: 0, y: 26 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          <Kicker>
+            <KickerNum>06</KickerNum>
+            <KickerRule />
+            <KickerWord>Contact</KickerWord>
+          </Kicker>
+
+          <Big>
+            Whether it's an internship, a research idea, or a pickup tennis
+            match — my inbox is open.
+          </Big>
+
+          <EmailRow>
+            <EmailLink href={`mailto:${EMAIL}`}>{EMAIL}</EmailLink>
+            <CopyButton onClick={copyEmail} aria-label="Copy email address">
+              {copied ? 'Copied ✓' : 'Copy'}
+            </CopyButton>
+          </EmailRow>
+        </Top>
+
+        <Elsewhere>
+          <ElsewhereLabel>Find me<br />elsewhere</ElsewhereLabel>
+          <SocialButtons>
+            {elsewhere.map((s) => (
+              <SocialButton key={s.name} href={s.link} target="_blank" rel="noopener noreferrer">
+                {s.name} <Arrow aria-hidden>↗</Arrow>
+              </SocialButton>
+            ))}
+          </SocialButtons>
+        </Elsewhere>
+
+        <BottomBar>
+          <Copyright>© {new Date().getFullYear()} Narain Sriram</Copyright>
+          <Made>designed & built from scratch in College Park, MD</Made>
+          <TopButton onClick={backToTop}>Back to top ↑</TopButton>
+        </BottomBar>
+      </Wrapper>
+    </FooterSection>
   );
 };
 
-const SectionContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+const FooterSection = styled.footer`
+  padding: 110px 0 34px;
+  background: transparent;
+  border-top: 1px solid ${({ theme }) => theme.color.line};
 `;
 
-const Canvas = styled.canvas`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
+const Kicker = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 26px;
 `;
 
-const ContentWrapper = styled.div`
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-  margin: auto;
-  padding: 0 20px;
-  text-align: center;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transform: ${({ visible }) => (visible ? 'translateY(0)' : 'translateY(20px)')};
-  transition: all 0.8s ease;
+const KickerNum = styled.span`
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  color: ${({ theme }) => theme.color.accentSky};
 `;
 
-const Heading = styled.h2`
-  font-size: 48px;
-  font-weight: 700;
-  margin: 0 0 50px 0;
-  margin-top: 100px;
-  color: #e6f1ff;
+const KickerRule = styled.span`
+  height: 1px;
+  width: 120px;
+  background: ${({ theme }) => theme.color.lineStrong};
+`;
+
+const KickerWord = styled.span`
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.color.muted};
+`;
+
+const Wrapper = styled.div`
+  max-width: ${({ theme }) => theme.maxWidth};
+  margin: 0 auto;
+  padding: 0 32px;
+  @media (max-width: 768px) { padding: 0 20px; }
+`;
+
+const Top = styled(motion.div)`
+  margin-bottom: 72px;
+`;
+
+const Big = styled.h2`
+  font-family: ${({ theme }) => theme.font.display};
+  font-weight: 500;
+  font-size: clamp(30px, 4.6vw, 54px);
+  line-height: 1.18;
+  letter-spacing: -0.018em;
+  color: ${({ theme }) => theme.color.ink};
+  max-width: 820px;
+  margin: 0 0 42px;
+`;
+
+const EmailRow = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+`;
+
+const EmailLink = styled.a`
+  font-family: ${({ theme }) => theme.font.display};
+  font-weight: 500;
+  font-size: clamp(19px, 2.6vw, 27px);
+  letter-spacing: -0.01em;
+  color: ${({ theme }) => theme.color.accentSky};
+  text-decoration: none;
   position: relative;
-  display: inline-block;
-  text-align: center;
 
   &:after {
     content: '';
     position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 315px;
-    height: 4px;
-    background-color: #64ffda;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: ${({ theme }) => theme.color.accentSky};
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
+
+  &:hover:after { transform: scaleX(1); }
 `;
 
-const SocialRow = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-bottom: 60px;
-`;
-
-const SocialLink = styled.a`
-  background-color: #112240;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #1e3a5f;
-  color: #e6f1ff;
-  text-decoration: none;
-  width: 140px;
-  transition: all 0.3s ease;
+const CopyButton = styled.button`
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 12.5px;
+  color: ${({ theme }) => theme.color.muted};
+  background: ${({ theme }) => theme.color.bgElevated};
+  border: 1px solid ${({ theme }) => theme.color.line};
+  border-radius: 999px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease;
 
   &:hover {
-    transform: translateY(-5px);
-    border-color: ${({ color }) => color};
+    color: ${({ theme }) => theme.color.ink};
+    border-color: ${({ theme }) => theme.color.lineStrong};
   }
 `;
 
-const IconWrapper = styled.div`
-  font-size: 32px;
-  margin-bottom: 8px;
+const Elsewhere = styled.div`
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 38px 0;
+  border-top: 1px solid ${({ theme }) => theme.color.line};
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
 `;
 
-const SocialName = styled.div`
-  font-size: 16px;
-  font-weight: 600;
+const ElsewhereLabel = styled.div`
+  font-family: ${({ theme }) => theme.font.display};
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: ${({ theme }) => theme.color.ink};
+
+  @media (max-width: 700px) {
+    br { display: none; }
+  }
 `;
 
-const Footer = styled.footer`
-  font-size: 14px;
-  color: #8892b0;
-  margin-top: 400px;
+const SocialButtons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+`;
+
+const Arrow = styled.span`
+  display: inline-block;
+  color: ${({ theme }) => theme.color.accent};
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+`;
+
+const SocialButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  color: ${({ theme }) => theme.color.inkSoft};
+  text-decoration: none;
+  background: ${({ theme }) => theme.color.bgElevated};
+  border: 1px solid ${({ theme }) => theme.color.lineStrong};
+  border-radius: 999px;
+  padding: 12px 24px;
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    color: ${({ theme }) => theme.color.ink};
+    border-color: ${({ theme }) => theme.color.accent};
+    transform: translateY(-2px);
+
+    ${Arrow} { transform: translate(2px, -2px); }
+  }
+
+  @media (max-width: 700px) {
+    flex: 1 1 calc(50% - 7px);
+    justify-content: center;
+  }
+`;
+
+const BottomBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 26px;
+  border-top: 1px solid ${({ theme }) => theme.color.line};
+`;
+
+const Copyright = styled.div`
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.muted};
+`;
+
+const Made = styled.div`
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.muted};
+  text-align: center;
+
+  @media (max-width: 700px) { display: none; }
+`;
+
+const TopButton = styled.button`
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 12px;
+  color: ${({ theme }) => theme.color.muted};
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.25s ease;
+
+  &:hover { color: ${({ theme }) => theme.color.accentSky}; }
 `;
 
 export default Contact;

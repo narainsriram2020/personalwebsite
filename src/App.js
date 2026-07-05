@@ -1,6 +1,8 @@
 // App.js
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React from 'react';
+import { ThemeProvider, createGlobalStyle, keyframes } from 'styled-components';
+import styled from 'styled-components';
+import theme from './theme';
 import Header from './Header';
 import Home from './Home';
 import Skills from './Skills';
@@ -9,160 +11,144 @@ import Projects from './Projects';
 import Education from './Education';
 import Contact from './Contact';
 import Volunteering from './Volunteering';
-import { createGlobalStyle } from 'styled-components';
-import styled, { keyframes } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  /* Prevent horizontal overflow */
+  * { box-sizing: border-box; }
+
   html, body {
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
-    background-color: #0a192f;
-    color: #e6f1ff;
-    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    background-color: ${({ theme }) => theme.color.bg};
+    color: ${({ theme }) => theme.color.ink};
+    font-family: ${({ theme }) => theme.font.body};
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* Responsive font sizes */
   html {
     font-size: 16px;
-
-    @media (max-width: 768px) {
-      font-size: 14px;
-    }
+    scroll-behavior: smooth;
+    @media (max-width: 768px) { font-size: 15px; }
   }
 
-  /* Scrollbar Styles */
-  ::-webkit-scrollbar {
-    width: 8px;
+  h1, h2, h3, h4 {
+    font-family: ${({ theme }) => theme.font.display};
+    font-weight: 500;
   }
 
-  ::-webkit-scrollbar-track {
-    background: #0a192f;
+  a { color: inherit; }
+
+  ::selection {
+    background: ${({ theme }) => theme.color.accent};
+    color: ${({ theme }) => theme.color.bg};
   }
 
+  /* Film grain over everything — the texture that keeps flat color alive */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Quiet, monochrome scrollbar (no neon) */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: ${({ theme }) => theme.color.bg}; }
   ::-webkit-scrollbar-thumb {
-    background-color: #64ffda;
-    border-radius: 4px;
-    border: 2px solid #0a192f;
+    background-color: ${({ theme }) => theme.color.accentDeep};
+    border-radius: 6px;
+    border: 3px solid ${({ theme }) => theme.color.bg};
   }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #4cdbbd;
-  }
-
-  /* For Firefox */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #64ffda #0a192f;
+    scrollbar-color: ${({ theme }) => theme.color.accentDeep} ${({ theme }) => theme.color.bg};
   }
 `;
 
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+const drift1 = keyframes`
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(90px, 60px) scale(1.08); }
 `;
 
-const slideUp = keyframes`
-  0% {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+const drift2 = keyframes`
+  from { transform: translate(0, 0) scale(1.05); }
+  to   { transform: translate(-70px, 90px) scale(1); }
 `;
 
-const MainContainer = styled.div`
-  opacity: ${props => props.loaded ? 1 : 0};
-  transition: opacity 0.5s ease-in-out;
+const drift3 = keyframes`
+  from { transform: translate(0, 0); }
+  to   { transform: translate(50px, -70px); }
 `;
 
-const LoadingScreen = styled.div`
+// Fixed, slow-moving ambient glows that sit behind every section.
+const Atmosphere = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #0a192f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  opacity: ${props => props.loaded ? 0 : 1};
-  visibility: ${props => props.loaded ? 'hidden' : 'visible'};
-  transition: opacity 0.5s ease-in-out, visibility 0.5s;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
 `;
 
-const LogoAnimation = styled.div`
-  font-size: 72px;
-  font-weight: bold;
-  color: #64ffda;
-  position: relative;
-  animation: ${fadeIn} 2s ease-out;
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 0;
-    height: 4px;
-    background-color: #64ffda;
-    animation: expandLine 2s forwards;
-  }
-
-  @keyframes expandLine {
-    0% {
-      width: 0;
-    }
-    100% {
-      width: 100%;
-    }
-  }
+const Blob = styled.div`
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
 `;
 
-const Section = styled.div`
-  min-height: 100vh;
-  padding: 40px 0;
-  animation: ${slideUp} 0.8s ease-out;
-  animation-fill-mode: both;
-  animation-delay: ${props => props.delay || '0s'};
+const BlueGlow = styled(Blob)`
+  width: 58vw;
+  height: 58vw;
+  top: -18vw;
+  left: -12vw;
+  background: radial-gradient(circle, rgba(98, 164, 222, 0.13), transparent 62%);
+  animation: ${drift1} 34s ease-in-out infinite alternate;
 `;
 
-const App = () => {
-  const [loaded, setLoaded] = useState(false);
+const SkyGlow = styled(Blob)`
+  width: 46vw;
+  height: 46vw;
+  top: 34%;
+  right: -16vw;
+  background: radial-gradient(circle, rgba(155, 196, 232, 0.09), transparent 62%);
+  animation: ${drift2} 41s ease-in-out infinite alternate;
+`;
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoaded(true);
-    }, 2500);
+const AmberGlow = styled(Blob)`
+  width: 44vw;
+  height: 44vw;
+  bottom: -14vw;
+  left: 8vw;
+  background: radial-gradient(circle, rgba(224, 164, 92, 0.07), transparent 62%);
+  animation: ${drift3} 38s ease-in-out infinite alternate;
+`;
 
-    return () => clearTimeout(timer);
-  }, []);
+const Section = styled.section`
+  scroll-margin-top: 90px;
+`;
 
-  return (
-    <Router>
-      <GlobalStyle />
-      <LoadingScreen loaded={loaded}>
-        <LogoAnimation>NS</LogoAnimation>
-      </LoadingScreen>
-      <MainContainer loaded={loaded}>
-        <Header />
-        <Section id="home" delay="0.2s"><Home /></Section>
-        <Section id="experience" delay="0.4s"><Experience /></Section>
-        <Section id="skills" delay="0.3s"><Skills /></Section>
-        <Section id="projects" delay="0.5s"><Projects /></Section>
-        <Section id="education" delay="0.6s"><Education /></Section>
-        <Section id="volunteering" delay="0.7s"><Volunteering /></Section>
-        <Section id="contact" delay="0.8s"><Contact /></Section>
-      </MainContainer>
-    </Router>
-  );
-}
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    <Atmosphere aria-hidden>
+      <BlueGlow />
+      <SkyGlow />
+      <AmberGlow />
+    </Atmosphere>
+    <Header />
+    <main>
+      <Section id="home"><Home /></Section>
+      <Section id="experience"><Experience /></Section>
+      <Section id="skills"><Skills /></Section>
+      <Section id="projects"><Projects /></Section>
+      <Section id="education"><Education /></Section>
+      <Section id="volunteering"><Volunteering /></Section>
+      <Section id="contact"><Contact /></Section>
+    </main>
+  </ThemeProvider>
+);
 
 export default App;

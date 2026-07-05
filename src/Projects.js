@@ -1,442 +1,578 @@
-import React, {useState} from 'react';
-import styled, { keyframes } from 'styled-components';
-import { FaGithub, FaYoutube } from 'react-icons/fa';
-import { GiTurtleShell } from "react-icons/gi";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import styled from 'styled-components';
+import SectionHeading from './SectionHeading';
+import satedCover from './projectimages/sated2.jpg';
+
+const featured = [
+    {
+        id: 'planetterp',
+        name: 'PlanetTerp Chatbot',
+        tagline: 'AI assistant for UMD course & professor reviews',
+        overview: 'A virtual assistant for PlanetTerp — where UMD students look up course reviews, professor ratings, and grade distributions. Instead of searching, students just ask: the bot retrieves reviews, historical grades, and UMD facts conversationally, with chat history for context across a session.',
+        detail: 'Built in Python on Streamlit, with the Google Gemini API generating context-aware answers. Semantic search surfaces the most relevant reviews, and caching keeps response times fast.',
+        tech: ['Python', 'Streamlit', 'Gemini API', 'Semantic Search'],
+        cover: { type: 'chat' },
+        links: [
+            { label: 'GitHub', href: 'https://github.com/narainsriram2020/PlanetTerpChatBot' },
+            { label: 'Live chatbot', href: 'https://planetterp-chat-bot.streamlit.app/' },
+        ],
+    },
+    {
+        id: 'sated',
+        name: 'Sated',
+        tagline: 'The best bang for your buck, at 3,900+ Chipotles',
+        overview: 'A full-stack platform that ranks every Chipotle location in America — all 3,900+ of them — with real-time weighted community ratings across portion size, protein, speed, cleanliness, and consistency. Search any area on the map, filter dynamically, and find the location that actually loads your bowl.',
+        detail: 'A PostgreSQL schema designed around the ratings model, with Next.js APIs computing weighted rankings and analytics in real time. Mapbox GL drives the interactive map on a responsive TypeScript frontend, and indexed queries and aggregations keep everything low-latency.',
+        tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Mapbox GL'],
+        cover: { type: 'image', src: satedCover, position: 'left center', href: 'https://sated.vercel.app/' },
+        links: [
+            { label: 'Live app', href: 'https://sated.vercel.app/' },
+        ],
+    },
+    {
+        id: 'bizcamp',
+        name: 'BizCamp',
+        tagline: 'Boost company workflow with AI',
+        overview: 'An AI-driven productivity tool inspired by Salesforce and CRM software: real-time meeting transcription, smart summaries, concept-graph generation, and an integrated AI chatbot. BizCamp turns meeting data into actionable insight so teams can track engagement and make better decisions.',
+        detail: 'Next.js frontend, FastAPI backend, MongoDB for structured data, and Qdrant as the vector database for semantic search. AssemblyAI powers real-time transcription. Special attention went into a scalable database architecture and handling large volumes of meeting data securely.',
+        tech: ['Next.js', 'FastAPI', 'MongoDB', 'Qdrant', 'AssemblyAI'],
+        cover: { type: 'video', src: 'https://i.ytimg.com/vi/0aQxmoBndzs/hqdefault.jpg', href: 'https://www.youtube.com/watch?v=0aQxmoBndzs' },
+        links: [
+            { label: 'GitHub', href: 'https://github.com/aluthra23/bizcamp' },
+            { label: 'Demo', href: 'https://www.youtube.com/watch?v=0aQxmoBndzs' },
+            { label: 'Devpost', href: 'https://devpost.com/software/902064?ref_content=existing_user_added_to_software_team&ref_feature=portfolio&ref_medium=email&utm_campaign=software&utm_content=added_to_software_team&utm_medium=email&utm_source=transactional#app-team' },
+        ],
+    },
+    {
+        id: 'livealittle',
+        name: 'Live a Little',
+        tagline: 'A daily push to actually go do something',
+        overview: 'Born from group chats that had gone quiet: every day, one random person in your friend group gets a real-world challenge — a small push to step outside the routine and actually do something. A full suite of party games keeps the whole group engaged whenever you\'re together, so you spend more time trying new things and reconnecting with the people who matter most.',
+        detail: 'Built in React Native with Expo, with a Supabase database behind groups, daily challenge assignment, and the party games.',
+        tech: ['React Native', 'Expo', 'Supabase'],
+        cover: { type: 'video', src: 'https://i.ytimg.com/vi/eEeHS8_GKww/hqdefault.jpg', href: 'https://www.youtube.com/watch?v=eEeHS8_GKww' },
+        links: [
+            { label: 'Demo', href: 'https://www.youtube.com/watch?v=eEeHS8_GKww' },
+            { label: 'Devpost', href: 'https://devpost.com/software/live-a-little' },
+        ],
+    },
+];
+
+const more = [
+    {
+        id: 'canadian_options',
+        name: 'CA Options Pricing',
+        tagline: 'Options pricing research on Canadian markets',
+        overview: 'A financial modeling project building replicable options-pricing tools for Canadian institutions, focused on the banking sector. Applied Black-Scholes and binomial tree models to Canadian market data with realistic parameter calibration — modular Jupyter notebooks, parquet-based storage, and validation against real market behavior.',
+        tech: ['Python', 'Pandas', 'NumPy', 'SciPy', 'Matplotlib'],
+        links: [
+            { label: 'GitHub', href: 'https://github.com/3752V/CA-options-pricing' },
+        ],
+    },
+    {
+        id: 'waiste',
+        name: 'wAIste',
+        tagline: 'AI-powered waste classification',
+        overview: 'Built with Arav Luthra: upload a photo of any waste item and two AI models — one for general classification, one for advanced garbage identification — tell you how to recycle it. Flutter frontend, Flask backend running Roboflow inference.',
+        tech: ['Flutter', 'Flask', 'Python', 'Roboflow'],
+        image: 'https://i.ytimg.com/vi/ZyRgfsvGNfk/hqdefault.jpg',
+        links: [
+            { label: 'GitHub', href: 'https://github.com/narainsriram2020/wAIste' },
+            { label: 'Demo', href: 'https://www.youtube.com/watch?v=ZyRgfsvGNfk&ab_channel=AravLuthra' },
+        ],
+    },
+    {
+        id: 'cisco',
+        name: 'Cisco Hackathon — 5th Place',
+        tagline: 'Last-mile logistics optimization',
+        overview: 'Tackled the last-mile delivery challenge at a Cisco-hosted hackathon: route planning, real-time tracking, and delivery-to-customer communication in an iOS app designed in Figma and built in Xcode. Placed 5th among all teams.',
+        tech: ['Swift', 'Xcode', 'Figma'],
+        image: 'https://i.ytimg.com/vi/HN9LMe0GwBM/hqdefault.jpg',
+        links: [
+            { label: 'Demo', href: 'https://www.youtube.com/watch?v=HN9LMe0GwBM&t=3s&ab_channel=NarainSriram' },
+        ],
+    },
+    {
+        id: 'website',
+        name: 'This Website',
+        tagline: 'Digital portfolio, designed & built from scratch',
+        overview: 'The site you are reading — React with styled-components and framer-motion, a single design system of editorial type, hairlines, and quiet interactions.',
+        tech: ['React', 'styled-components', 'framer-motion'],
+        links: [
+            { label: 'GitHub', href: 'https://github.com/narainsriram2020/personalwebsite/tree/master' },
+        ],
+    },
+    {
+        id: 'weather',
+        name: 'Weather App',
+        tagline: 'Forecasts for any coordinates on Earth',
+        overview: 'Enter coordinates anywhere in the world and get current conditions, a 5-day forecast, radar, humidity, and wind — built in React Native on the AccuWeather API.',
+        tech: ['React Native', 'AccuWeather API'],
+        links: [
+            { label: 'GitHub', href: 'https://github.com/narainsriram2020/React-Native-Apps/tree/main/weatherapp-narain-sriram' },
+        ],
+    },
+    {
+        id: 'workout',
+        name: 'Running Workout Tracker',
+        tagline: 'GPS fitness tracking for runners',
+        overview: 'Start a run, watch your route draw on the map, and get distance, average speed, and full stats at the finish — react-native-maps plus expo-location.',
+        tech: ['React Native', 'react-native-maps', 'expo-location'],
+        links: [
+            { label: 'GitHub', href: 'https://github.com/narainsriram2020/React-Native-Apps/tree/main/mapapp---sriram' },
+        ],
+    },
+    {
+        id: 'football',
+        name: 'Football Table Simulator',
+        tagline: 'Simulate a season in any league',
+        overview: 'Pick your league and simulate football match outcomes with algorithms tuned for realistic results — built in Swift with UIKit.',
+        tech: ['Swift', 'UIKit'],
+        links: [
+            { label: 'GitHub', href: 'https://github.com/narainsriram2020/FootballTable/tree/master' },
+        ],
+    },
+];
+
+const LinkRow = ({ links }) => (
+    <Links>
+        {links.map((l) => (
+            <ProjectLink key={l.label} href={l.href} target="_blank" rel="noopener noreferrer">
+                {l.label} ↗
+            </ProjectLink>
+        ))}
+    </Links>
+);
+
+/* Hand-built cover: mini chat exchange for the PlanetTerp bot */
+const ChatCover = () => (
+    <ChatCard>
+        <ChatTitle>🐢 PlanetTerp Chatbot</ChatTitle>
+        <BubbleUser>who should I take for CMSC330?</BubbleUser>
+        <BubbleBot>
+            Pulling PlanetTerp reviews, grade distributions, and professor
+            ratings for CMSC330 — here's what students say →
+        </BubbleBot>
+        <ChatInput>Ask about any UMD course or professor…</ChatInput>
+    </ChatCard>
+);
+
+const Cover = ({ cover, name }) => {
+    if (cover.type === 'video') {
+        return (
+            <CoverLink href={cover.href} target="_blank" rel="noopener noreferrer" aria-label={`Watch the ${name} demo`}>
+                <CoverImage src={cover.src} alt={`${name} demo video`} loading="lazy" />
+                <PlayBadge>▶ Watch demo</PlayBadge>
+            </CoverLink>
+        );
+    }
+    if (cover.type === 'chat') return <ChatCover />;
+    if (cover.href) {
+        return (
+            <CoverLink href={cover.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${name}`}>
+                <CoverImage src={cover.src} alt={`${name} screenshot`} loading="lazy" $position={cover.position} />
+                <PlayBadge>Open the app ↗</PlayBadge>
+            </CoverLink>
+        );
+    }
+    return (
+        <ImageCard>
+            <CoverImage src={cover.src} alt={`${name} screenshot`} loading="lazy" $position={cover.position} />
+        </ImageCard>
+    );
+};
 
 function Projects() {
-    const [expandedProject, setExpandedProject] = useState(null);
-
-    const projectsList = [
-        {
-            id: "bizcamp",
-            name: 'BizCamp',
-            tagline: "Boost company workflow with AI",
-            overview: 'BizCamp is an AI-driven productivity tool designed to streamline company workflow and optimize team collaboration. Drawing inspiration from Salesforce and CRM software, BizCamp offers real-time meeting transcriptions, smart meeting summaries, concept graph generation, and an integrated AI chatbot. By transforming meeting data into actionable insights, BizCamp empowers organizations to improve communication, track engagement, and enhance decision-making. The platform is built with scalability, security, and real-world deployment in mind, helping businesses manage knowledge and extract value from every conversation.',
-            techDetails: 'BizCamp is built using a modern tech stack, including Next.js for the frontend, FastAPI for the backend, MongoDB for structured data management, and Qdrant as the vector database for semantic search and retrieval. AssemblyAI provides real-time transcription capabilities, while GitHub is used for version control and collaboration. Special attention was given to designing an efficient, scalable database architecture, ensuring secure data handling, and optimizing AI-driven features to handle large volumes of meeting data.',
-            techStack: ['Next.js', 'FastAPI', 'MongoDB', 'Qdrant', 'AssemblyAI', 'GitHub'],
-            githubLink: 'https://github.com/aluthra23/bizcamp',
-            youtubeLink: 'https://www.youtube.com/watch?v=0aQxmoBndzs',
-            devPostLink: 'https://devpost.com/software/902064?ref_content=existing_user_added_to_software_team&ref_feature=portfolio&ref_medium=email&utm_campaign=software&utm_content=added_to_software_team&utm_medium=email&utm_source=transactional#app-team',
-            bgColor: '#e9f7ef', // Light green
-        },
-        {
-            id: "planetterp",
-            name: '🐢 PlanetTerp Chatbot',
-            tagline: "AI-powered virtual assistant for UMD students",
-            overview: 'The PlanetTerp Chatbot is an AI-powered virtual assistant designed to enhance the experience of using the Planet Terp website. Planet Terp is where UMD students can access reviews and ratings of courses, professors, and grade distributions. Unlike traditional search tools, this chatbot offers a fully interactive and immersive experience, allowing students to ask questions naturally and receive detailed responses. Key features include real-time retrieval of course reviews, professor ratings, historical grade distributions, and fun facts about UMD. The chatbot also supports chat history, enabling users to maintain context across conversations, and includes a sidebar with essential UMD-related resources to assist students in navigating their academic journey effectively. With its advanced AI capabilities, the chatbot streamlines the process of finding relevant academic information, helping students make well-informed decisions about their courses and professors.',
-            techDetails: 'The chatbot is developed using Python and built on Streamlit, a powerful framework for creating interactive web applications. This enables a clean and user-friendly interface, ensuring seamless interaction. The chatbot\'s AI-powered responses are made possible through the Google Gemini API, allowing it to generate context-aware, precise answers to user queries. To enhance search efficiency, the chatbot incorporates semantic search, ensuring students receive the most relevant information based on their input. A structured backend system handles query processing, and caching mechanisms are implemented to optimize response times, minimizing delays and improving user experience.',
-            techStack: ['Python', 'Streamlit', 'Google Gemini API', 'Semantic Search'],
-            githubLink: 'https://github.com/narainsriram2020/PlanetTerpChatBot',
-            chatLink: 'https://planetterp-chat-bot.streamlit.app/',
-            bgColor: '#e9f7ef', // Light green
-        },
-        {
-            id: "canadian_options",
-            name: 'CA Options Pricing',
-            tagline: "Canadian Options Research",
-            overview: 'CA Options Pricing is a financial modeling project focused on building robust options pricing tools for Canadian institutions. We applied classical models such as the Black-Scholes and the Binomial Tree method to Canadian financial datasets. Our main focus was in the Canadian banking sector. The goal is to provide replicable, scalable options pricing methodologies grounded in financial theory and real market behavior.',
-            techDetails: 'The project structure is built around modular Jupyter notebooks and Python scripts. Data is managed using efficient parquet file storage formats and processed with Python’s pandas library. Special emphasis is placed on realistic parameter calibration and model validation against market data.',
-            techStack: ['Python', 'Pandas', 'NumPy', 'Scipy', 'Matplotlib'],
-            githubLink: 'https://github.com/3752V/CA-options-pricing',
-            bgColor: '#e9f7ef', // Light green
-        },
-        {
-            id: "waiste",
-            name: 'wAIste',
-            tagline: "AI-powered waste classification system",
-            overview: (
-                <>
-                    I collaborated with{' '}
-                    <StyledLink
-                        href="https://www.linkedin.com/in/arav-luthra-7280ba221/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Arav Luthra
-                    </StyledLink>{' '}
-                    on this project. wAIste is an innovative project that utilizes AI technology to streamline waste management and recycling efforts. The platform allows users to upload images of various waste items, which are then analyzed by AI algorithms to determine the appropriate recycling category. What distinguishes wAIste is its employment of two distinct AI models: one dedicated to general waste classification, and another specialized in advanced garbage identification. In the future, we plan to further enhance wAIste by integrating additional features and expanding its capabilities. This includes improving the accuracy of AI predictions, adding support for different types of waste materials, and incorporating user feedback to enhance the user experience. We also aim to explore partnerships with recycling organizations and municipalities to scale the impact of wAIste and promote sustainable waste management on a larger scale.
-                </>
-            ),
-            techDetails: 'The front end was developed using Flutter, a cross-platform framework for building mobile applications, allowing us to create a user-friendly interface for image uploading and result display. On the backend, we used Flask, a lightweight web framework in Python, to handle image processing and AI inference. It utilizes the Roboflow platform\'s inference SDK to integrate with machine learning models for waste categorization and garbage detection. Powered by a Flask server, wAIste facilitates seamless interaction between the front-end mobile application and the underlying AI models, delivering efficient and tailored waste management recommendations to users.',
-            techStack: ['Flutter', 'Flask', 'Python', 'Roboflow', 'Machine Learning'],
-            githubLink: 'https://github.com/narainsriram2020/wAIste',
-            youtubeLink: 'https://www.youtube.com/watch?v=ZyRgfsvGNfk&ab_channel=AravLuthra',
-            bgColor: '#e6f7f5', // Light teal
-        },
-        {
-            id: "cisco",
-            name: 'Cisco Hackathon',
-            tagline: "Last-mile logistics optimization solution",
-            overview: 'As a team, we participated in a Cisco-hosted hackathon, where we collectively tackled the last-mile challenge in logistics. Together, we developed an innovative application designed to optimize route planning, enhance real-time tracking capabilities, and facilitate seamless communication between delivery personnel and customers, aiming to revolutionize the final leg of the delivery process. Our solution secured 5th place among all participating groups, highlighting its effectiveness in addressing last-mile inefficiencies and showcasing our dedication to innovation in logistics technology.',
-            techDetails: 'We developed the app using Xcode, which is an Integrated Development Environment (IDE) for macOS. Xcode is primarily used for developing software for Apple platforms, such as iOS and macOS. Additionally, we utilized Figma for designing the app. Figma is a web-based design tool used for collaborative interface design.',
-            techStack: ['Xcode', 'Swift', 'Figma'],
-            youtubeLink: 'https://www.youtube.com/watch?v=HN9LMe0GwBM&t=3s&ab_channel=NarainSriram',
-            bgColor: '#eae6f7', // Light purple
-        },
-        {
-            id: "website",
-            name: 'Personal Website',
-            tagline: "Digital portfolio",
-            overview: 'My personal website serves as a digital reflection of who I am professionally. It\'s a virtual space where I compile and showcase my skills, past projects, diverse experiences, volunteer engagements, and educational background. Essentially, it encapsulates all the essential aspects of my professional journey, offering visitors a comprehensive insight into my capabilities and accomplishments.',
-            techDetails: 'In crafting this website, I opted for React.js, a powerful JavaScript library renowned for its ability to create dynamic and interactive user interfaces. With React.js, I could design a website that presents information and engages visitors with seamless navigation and visually appealing design elements. Its flexibility allowed me to develop reusable components, ensuring consistency and efficiency across the website. Moreover, React.js facilitated easy updates, enabling me to keep the website current and reflective of my latest endeavors.',
-            techStack: ['React.js', 'Styled Components', 'JavaScript', 'HTML/CSS'],
-            githubLink: 'https://github.com/narainsriram2020/personalwebsite/tree/master',
-            bgColor: '#f7e6e6', // Light pink
-        },
-        {
-            id: "weather",
-            name: 'Weather App',
-            tagline: "Retrieve weather information for any location",
-            overview: 'An app where the user can enter in the coordinates of any place in the world and the current weather, 5-day weather, radar, and other information (humidity, wind speed, etc..) will be returned. ',
-            techDetails: 'The app was developed using React Native, a framework for building mobile applications using JavaScript and React. React Native allows for cross-platform development, enabling the creation of iOS and Android apps from a single codebase. The Accuweather API was integrated into the app, facilitating access to weather data through API calls. API integration involves making requests to external servers to retrieve and display information, in this case, weather data such as current conditions, forecasts, and radar images.',
-            techStack: ['React Native', 'JavaScript', 'Accuweather API'],
-            githubLink: 'https://github.com/narainsriram2020/React-Native-Apps/tree/main/weatherapp-narain-sriram',
-            bgColor: '#e6f0f7', // Light blue
-        },
-        {
-            id: "workout",
-            name: 'Running Workout Tracker',
-            tagline: "Mobile fitness tracking for runners",
-            overview: 'A mobile app that allows users to track their running workouts. The app implements functionalities like starting and stopping the stopwatch, tracking user location and displaying markers on the map, calculating total distance and average speed, and navigating to the final screen to display run statistics.',
-            techDetails: 'The app is built using React Native, a framework for building cross-platform mobile applications with JavaScript and React. It utilizes the react-native-maps library for displaying maps and tracking user location, and integrates with the expo-location library to access device location services.',
-            techStack: ['React Native', 'JavaScript', 'react-native-maps', 'expo-location'],
-            githubLink: 'https://github.com/narainsriram2020/React-Native-Apps/tree/main/mapapp---sriram',
-            bgColor: '#f7f6e6', // Light yellow
-        },
-        {
-            id: "football",
-            name: 'Football Table Simulator',
-            tagline: "Interactive football simulator",
-            overview: 'I developed an app enabling users to simulate football (soccer) match outcomes by selecting their preferred leagues. This endeavor showcases my skills in app development and passion for coding, combining technology with sports simulation.',
-            techDetails: 'The app was developed using Swift, Apple\'s programming language for iOS, macOS, watchOS, and tvOS app development. Swift is known for its performance, safety features, and ease of use, making it ideal for building robust and efficient iOS applications. The user-friendly interface was crafted using Swift\'s UIKit framework, which provides a set of components and tools for building interactive user interfaces on iOS devices. Additionally, advanced algorithms were implemented in Swift to ensure accurate match simulations, leveraging the language\'s versatility and power in handling complex computations.',
-            techStack: ['Swift', 'UIKit', 'iOS Development'],
-            githubLink: 'https://github.com/narainsriram2020/FootballTable/tree/master',
-            bgColor: '#f0e6f7', // Light lavender
-        },
-    ];
-
-    const toggleProject = (id) => {
-        if (expandedProject === id) {
-            setExpandedProject(null);
-        } else {
-            setExpandedProject(id);
-        }
-    };
+    const [openIdx, setOpenIdx] = useState(null);
 
     return (
-        <SectionContainer>
-            <ContentWrapper>
-                <Heading>Projects</Heading>
+        <Section>
+            <Wrapper>
+                <SectionHeading index="03" title="Projects" />
 
-                <GithubProfileButton href="https://github.com/narainsriram2020" target="_blank">
-                <GitHubIcon size={24} style={{ marginRight: '8px' }} />
-                View My GitHub Profile
-                </GithubProfileButton>
+                {featured.map((p, i) => (
+                    <Feature
+                        key={p.id}
+                        $flip={i % 2 === 1}
+                        initial={{ opacity: 0, y: 28 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        viewport={{ once: true, margin: '-70px' }}
+                    >
+                        <FeatBody>
+                            <FeatNum>{String(i + 1).padStart(2, '0')}</FeatNum>
+                            <FeatName>{p.name}</FeatName>
+                            <FeatTagline>{p.tagline}</FeatTagline>
+                            <FeatText>{p.overview}</FeatText>
+                            <FeatDetail>{p.detail}</FeatDetail>
+                            <TechRow>{p.tech.join(' · ')}</TechRow>
+                            <LinkRow links={p.links} />
+                        </FeatBody>
 
-                <ProjectGrid>
-                    {projectsList.map((project, index) => (
-                        <ProjectCard
-                            key={project.id}
-                            expanded={expandedProject === project.id}
-                            isLast={index === projectsList.length - 1}
-                        >
-                            <ProjectHeader>
-                                <ProjectName>{project.name}</ProjectName>
-                                <ProjectTagline>{project.tagline}</ProjectTagline>
-                                <ExpandButton
-                                    onClick={() => toggleProject(project.id)}
-                                    expanded={expandedProject === project.id}
-                                >
-                                    {expandedProject === project.id ? 'Show Less' : 'Show More'}
-                                </ExpandButton>
-                            </ProjectHeader>
+                        <CoverWrap $tilt={i % 2 === 1 ? 1.4 : -1.4}>
+                            <Cover cover={p.cover} name={p.name} />
+                        </CoverWrap>
+                    </Feature>
+                ))}
 
-                            {expandedProject === project.id && (
-                                <ProjectDetails>
-                                    <DetailSection>
-                                        <SectionTitle>Project Overview</SectionTitle>
-                                        <DetailText>{project.overview}</DetailText>
-                                    </DetailSection>
+                <MoreLabel>More projects</MoreLabel>
+                <MoreList>
+                    {more.map((p, i) => {
+                        const isOpen = openIdx === i;
+                        return (
+                            <MoreRow key={p.id}>
+                                <MoreButton onClick={() => setOpenIdx(isOpen ? null : i)} aria-expanded={isOpen}>
+                                    <MoreName $open={isOpen}>{p.name}</MoreName>
+                                    <MoreTagline>{p.tagline}</MoreTagline>
+                                    <Plus $open={isOpen} aria-hidden>+</Plus>
+                                </MoreButton>
+                                <AnimatePresence initial={false}>
+                                    {isOpen && (
+                                        <MoreDetails
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                                        >
+                                            <MoreDetailsInner $hasImage={!!p.image}>
+                                                <div>
+                                                    <FeatText>{p.overview}</FeatText>
+                                                    <TechRow>{p.tech.join(' · ')}</TechRow>
+                                                    <LinkRow links={p.links} />
+                                                </div>
+                                                {p.image && (
+                                                    <MoreThumb src={p.image} alt={`${p.name} demo video thumbnail`} loading="lazy" />
+                                                )}
+                                            </MoreDetailsInner>
+                                        </MoreDetails>
+                                    )}
+                                </AnimatePresence>
+                            </MoreRow>
+                        );
+                    })}
+                </MoreList>
 
-                                    <DetailSection>
-                                        <SectionTitle>Technical Details</SectionTitle>
-                                        <DetailText>{project.techDetails}</DetailText>
-                                    </DetailSection>
-
-                                    <TechStackSection>
-                                        <SectionTitle>Tech Stack</SectionTitle>
-                                        <TechBadgeContainer>
-                                            {project.techStack.map((tech, idx) => (
-                                                <TechBadge key={idx}>{tech}</TechBadge>
-                                            ))}
-                                        </TechBadgeContainer>
-                                    </TechStackSection>
-
-                                    <ButtonGroup>
-                                        {project.githubLink && (
-                                            <ActionButton href={project.githubLink} target="_blank">
-                                                <GitHubIcon />
-                                                GitHub Repo
-                                            </ActionButton>
-                                        )}
-                                        {project.youtubeLink && (
-                                            <ActionButton
-                                                href={project.youtubeLink}
-                                                target="_blank"
-                                                youtube
-                                            >
-                                                <YouTubeIcon />
-                                                Demo Video
-                                            </ActionButton>
-                                        )}
-                                        {project.chatLink && (
-                                            <ActionButton
-                                                href={project.chatLink}
-                                                target="_blank"
-                                                terp
-                                            >
-                                                <TerpIcon />
-                                                Visit Chatbot
-                                            </ActionButton>
-                                        )}
-                                    </ButtonGroup>
-                                </ProjectDetails>
-                            )}
-                        </ProjectCard>
-                    ))}
-                </ProjectGrid>
-            </ContentWrapper>
-        </SectionContainer>
+                <AllProjects href="https://github.com/narainsriram2020" target="_blank" rel="noopener noreferrer">
+                    See everything on GitHub ↗
+                </AllProjects>
+            </Wrapper>
+        </Section>
     );
 }
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+const Section = styled.div`
+    padding: 120px 0;
+    background: transparent;
 `;
 
-const SectionContainer = styled.div`
-    padding: 100px 0;
-    background-color: #0a192f;
-    color: #e6f1ff;
-`;
-
-const ContentWrapper = styled.div`
-    max-width: 1200px;
+const Wrapper = styled.div`
+    max-width: ${({ theme }) => theme.maxWidth};
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 32px;
+    @media (max-width: 768px) { padding: 0 20px; }
 `;
 
-const Heading = styled.h2`
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 60px;
-    color: #e6f1ff;
-    text-align: center;
-    position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    &:after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background-color: #64ffda;
-    }
-`;
-
-const GithubProfileButton = styled.a`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #112240;
-    color: #64ffda;
-    border: 1px solid #64ffda;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 0 auto 40px;
-    max-width: 250px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    
-    &:hover {
-        background-color: rgba(100, 255, 218, 0.1);
-        transform: translateY(-3px);
-    }
-`;
-
-const ProjectGrid = styled.div`
+const Feature = styled(motion.div)`
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 30px;
-    
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-    }
-`;
-
-const ProjectCard = styled.div`
-    background-color: #112240;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
-    border: 1px solid #1e3a5f;
-    transition: all 0.3s ease;
-    height: ${props => props.expanded ? 'auto' : '220px'};
-    display: flex;
-    flex-direction: column;
-    
-    &:hover {
-        border-color: #64ffda;
-        box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
-    }
-    
-    animation: ${fadeIn} 0.5s ease-out;
-    animation-delay: ${props => Math.min(0.1 * props.index, 1)}s;
-`;
-
-const ProjectHeader = styled.div`
-    padding: 25px 25px 20px;
-    border-bottom: ${props => props.expanded ? '1px solid #1e3a5f' : 'none'};
-`;
-
-const ProjectName = styled.h3`
-    font-size: 24px;
-    font-weight: 700;
-    color: #e6f1ff;
-    margin: 0 0 10px;
-`;
-
-const ProjectTagline = styled.p`
-    font-size: 16px;
-    color: #64ffda;
-    margin: 0 0 15px;
-`;
-
-const ExpandButton = styled.button`
-    background: none;
-    border: none;
-    color: #64ffda;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 0;
-    display: flex;
+    grid-template-columns: ${({ $flip }) => ($flip ? '0.9fr 1.1fr' : '1.1fr 0.9fr')};
+    gap: 60px;
     align-items: center;
-    transition: all 0.2s ease;
-    
-    &:hover {
-        color: #64ffda;
-        text-decoration: underline;
+    padding: 56px 0;
+    border-top: 1px solid ${({ theme }) => theme.color.line};
+
+    ${({ $flip }) => $flip && `
+        & > *:first-child { order: 2; }
+        & > *:last-child  { order: 1; }
+    `}
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 42px 0;
+
+        & > *:first-child { order: 2; }
+        & > *:last-child  { order: 1; }
     }
 `;
 
-const ProjectDetails = styled.div`
-    padding: 25px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+const FeatBody = styled.div``;
+
+const FeatNum = styled.div`
+    font-family: ${({ theme }) => theme.font.mono};
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: ${({ theme }) => theme.color.accentSky};
+    margin-bottom: 10px;
 `;
 
-const DetailSection = styled.div`
-    margin-bottom: 15px;
+const FeatName = styled.h3`
+    font-family: ${({ theme }) => theme.font.display};
+    font-weight: 500;
+    font-size: clamp(26px, 3.8vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: ${({ theme }) => theme.color.ink};
+    margin: 0 0 6px;
 `;
 
-const SectionTitle = styled.h4`
-    font-size: 18px;
-    font-weight: 600;
-    color: #64ffda;
-    margin: 0 0 10px;
+const FeatTagline = styled.div`
+    font-size: 15px;
+    color: ${({ theme }) => theme.color.accentSky};
+    margin-bottom: 18px;
 `;
 
-const DetailText = styled.div`
-    font-size: 16px;
-    line-height: 1.6;
-    color: #a8b2d1;
+const FeatText = styled.p`
+    font-size: 15px;
+    line-height: 1.75;
+    color: ${({ theme }) => theme.color.inkSoft};
+    margin: 0 0 12px;
 `;
 
-const TechStackSection = styled.div`
-    margin-bottom: 20px;
+const FeatDetail = styled.p`
+    font-size: 14px;
+    line-height: 1.7;
+    color: ${({ theme }) => theme.color.muted};
+    margin: 0 0 18px;
 `;
 
-const TechBadgeContainer = styled.div`
+const TechRow = styled.div`
+    font-family: ${({ theme }) => theme.font.mono};
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: ${({ theme }) => theme.color.accentSky};
+    margin-bottom: 14px;
+`;
+
+const Links = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 `;
 
-const TechBadge = styled.span`
-    background-color: rgba(100, 255, 218, 0.1);
-    color: #64ffda;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    font-family: 'Roboto Mono', monospace;
-`;
-
-const ButtonGroup = styled.div`
-    display: flex;
-    gap: 15px;
-    margin-top: auto;
-    
-    @media (max-width: 600px) {
-        flex-direction: column;
-        gap: 10px;
-    }
-`;
-
-const ActionButton = styled.a`
-    display: flex;
+const ProjectLink = styled.a`
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background-color: transparent;
-    color: #64ffda;
-    border: 1px solid #64ffda;
-    border-radius: 4px;
-    padding: 8px 15px;
-    font-size: 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.color.accentSky};
     text-decoration: none;
-    transition: all 0.3s ease;
-    
+    background: rgba(98, 164, 222, 0.08);
+    border: 1px solid ${({ theme }) => theme.color.lineStrong};
+    border-radius: 999px;
+    padding: 8px 18px;
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
     &:hover {
-        background-color: rgba(100, 255, 218, 0.1);
+        color: ${({ theme }) => theme.color.bg};
+        background: ${({ theme }) => theme.color.accentSky};
+        border-color: ${({ theme }) => theme.color.accentSky};
         transform: translateY(-2px);
     }
 `;
 
-const GitHubIcon = styled(FaGithub)`
-    font-size: ${props => props.size ? `${props.size}px` : '16px'};
-    color: #64ffda;
+const CoverWrap = styled.div`
+    position: relative;
+    transform: rotate(${({ $tilt }) => $tilt}deg);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &:hover { transform: rotate(0deg) scale(1.01); }
 `;
 
-const YouTubeIcon = styled(FaYoutube)`
-    margin-right: 8px;
+const coverCard = `
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    border-radius: 18px;
+    overflow: hidden;
 `;
 
-const TerpIcon = styled(GiTurtleShell)`
-    margin-right: 8px;
+const CoverLink = styled.a`
+    ${coverCard}
+    position: relative;
+    border: 1px solid ${({ theme }) => theme.color.lineStrong};
+    box-shadow: 0 30px 80px rgba(3, 10, 22, 0.55);
 `;
 
-const StyledLink = styled.a`
-    color: #64ffda;
-    text-decoration: underline;
-    
-    &:hover {
-        text-decoration: none;
+const CoverImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: ${({ $position }) => $position || 'center'};
+    display: block;
+`;
+
+const ImageCard = styled.div`
+    ${coverCard}
+    border: 1px solid ${({ theme }) => theme.color.lineStrong};
+    box-shadow: 0 30px 80px rgba(3, 10, 22, 0.55);
+    background: ${({ theme }) => theme.color.bgElevated};
+`;
+
+const PlayBadge = styled.span`
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    font-family: ${({ theme }) => theme.font.mono};
+    font-size: 12px;
+    color: ${({ theme }) => theme.color.ink};
+    background: rgba(11, 26, 46, 0.82);
+    backdrop-filter: blur(6px);
+    border: 1px solid ${({ theme }) => theme.color.line};
+    border-radius: 999px;
+    padding: 7px 14px;
+`;
+
+const ChatCard = styled.div`
+    ${coverCard}
+    background: ${({ theme }) => theme.color.bgElevated};
+    border: 1px solid ${({ theme }) => theme.color.lineStrong};
+    box-shadow: 0 30px 80px rgba(3, 10, 22, 0.55);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+`;
+
+const ChatTitle = styled.div`
+    font-family: ${({ theme }) => theme.font.display};
+    font-weight: 500;
+    font-size: 15px;
+    color: ${({ theme }) => theme.color.ink};
+    padding-bottom: 12px;
+    border-bottom: 1px solid ${({ theme }) => theme.color.line};
+`;
+
+const BubbleUser = styled.div`
+    align-self: flex-end;
+    max-width: 78%;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: ${({ theme }) => theme.color.bg};
+    background: ${({ theme }) => theme.color.accentSky};
+    border-radius: 14px 14px 4px 14px;
+    padding: 9px 14px;
+`;
+
+const BubbleBot = styled.div`
+    align-self: flex-start;
+    max-width: 85%;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: ${({ theme }) => theme.color.inkSoft};
+    background: ${({ theme }) => theme.color.bgInset};
+    border: 1px solid ${({ theme }) => theme.color.line};
+    border-radius: 14px 14px 14px 4px;
+    padding: 10px 14px;
+`;
+
+const ChatInput = styled.div`
+    margin-top: auto;
+    font-size: 13px;
+    color: ${({ theme }) => theme.color.muted};
+    background: ${({ theme }) => theme.color.bgInset};
+    border: 1px solid ${({ theme }) => theme.color.line};
+    border-radius: 999px;
+    padding: 10px 16px;
+`;
+
+const MoreLabel = styled.div`
+    font-family: ${({ theme }) => theme.font.display};
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: ${({ theme }) => theme.color.ink};
+    margin: 64px 0 14px;
+`;
+
+const MoreList = styled.div`
+    border-bottom: 1px solid ${({ theme }) => theme.color.line};
+`;
+
+const MoreRow = styled.div`
+    border-top: 1px solid ${({ theme }) => theme.color.line};
+`;
+
+const MoreButton = styled.button`
+    display: grid;
+    grid-template-columns: minmax(200px, 320px) 1fr 40px;
+    align-items: baseline;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr 28px;
     }
+`;
+
+const MoreName = styled.span`
+    font-family: ${({ theme }) => theme.font.display};
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    color: ${({ $open, theme }) => ($open ? theme.color.ink : theme.color.inkSoft)};
+    transition: color 0.25s ease;
+
+    ${MoreButton}:hover & { color: ${({ theme }) => theme.color.ink}; }
+`;
+
+const MoreTagline = styled.span`
+    font-size: 13.5px;
+    color: ${({ theme }) => theme.color.muted};
+
+    @media (max-width: 768px) { display: none; }
+`;
+
+const Plus = styled.span`
+    justify-self: end;
+    font-family: ${({ theme }) => theme.font.mono};
+    font-size: 19px;
+    font-weight: 300;
+    line-height: 1;
+    color: ${({ $open, theme }) => ($open ? theme.color.accent : theme.color.muted)};
+    transform: rotate(${({ $open }) => ($open ? '45deg' : '0deg')});
+    transition: transform 0.35s ease, color 0.3s ease;
+`;
+
+const MoreDetails = styled(motion.div)`
+    overflow: hidden;
+`;
+
+const MoreDetailsInner = styled.div`
+    display: grid;
+    grid-template-columns: ${({ $hasImage }) => ($hasImage ? 'minmax(0, 1fr) 240px' : 'minmax(0, 720px)')};
+    gap: 28px;
+    align-items: start;
+    padding: 2px 0 26px;
+
+    @media (max-width: 700px) {
+        grid-template-columns: 1fr;
+    }
+`;
+
+const MoreThumb = styled.img`
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid ${({ theme }) => theme.color.lineStrong};
+    box-shadow: 0 16px 44px rgba(3, 10, 22, 0.45);
+`;
+
+const AllProjects = styled.a`
+    display: inline-block;
+    font-size: 14px;
+    color: ${({ theme }) => theme.color.muted};
+    text-decoration: none;
+    margin-top: 36px;
+    transition: color 0.25s ease;
+
+    &:hover { color: ${({ theme }) => theme.color.accentSky}; }
 `;
 
 export default Projects;
