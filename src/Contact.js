@@ -67,7 +67,6 @@ const Contact = () => {
 
         <BottomBar>
           <Copyright>© {new Date().getFullYear()} Narain Sriram</Copyright>
-          <Made>designed & built from scratch in College Park, MD</Made>
           <TopButton onClick={backToTop}>Back to top ↑</TopButton>
         </BottomBar>
       </Wrapper>
