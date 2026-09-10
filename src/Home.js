@@ -26,11 +26,6 @@ const wordReveal = {
   }),
 };
 
-const scrollToExperience = () => {
-  const el = document.getElementById('experience');
-  if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
-};
-
 function Home() {
   const letterRefs = useRef([]);
   const [play, setPlay] = useState(false);
@@ -128,7 +123,7 @@ function Home() {
         </Lead>
 
         <Actions custom={1} variants={fade} initial="hidden" animate="show">
-          <Primary as="button" onClick={scrollToExperience}>
+          <Primary href="#experience">
             View my work
           </Primary>
           <Socials>

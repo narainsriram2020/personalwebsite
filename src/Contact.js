@@ -261,15 +261,6 @@ const Copyright = styled.div`
   color: ${({ theme }) => theme.color.muted};
 `;
 
-const Made = styled.div`
-  font-family: ${({ theme }) => theme.font.mono};
-  font-size: 12px;
-  color: ${({ theme }) => theme.color.muted};
-  text-align: center;
-
-  @media (max-width: 700px) { display: none; }
-`;
-
 const TopButton = styled.button`
   font-family: ${({ theme }) => theme.font.mono};
   font-size: 12px;

@@ -38,15 +38,7 @@ function Header() {
   }, [activeSection]);
 
   const handleNavClick = (sectionId) => {
-    if (sectionId === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        const offset = window.innerWidth <= 768 ? 80 : 0;
-        window.scrollTo({ top: section.offsetTop - offset, behavior: 'smooth' });
-      }
-    }
+    setActiveSection(sectionId);
     setIsMobileMenuOpen(false);
   };
 
@@ -54,15 +46,15 @@ function Header() {
     <Container>
       <TopBar isAtTop={isAtTop}>
         <Bar>
-          <Logo onClick={() => handleNavClick('home')}>NS</Logo>
-          <Toggle onClick={() => setIsMobileMenuOpen((v) => !v)} open={isMobileMenuOpen}>
+          <Logo href="#home" aria-label="Narain Sriram — home" onClick={() => handleNavClick('home')}>NS</Logo>
+          <Toggle aria-label="Toggle navigation" aria-expanded={isMobileMenuOpen} aria-controls="primary-navigation" onClick={() => setIsMobileMenuOpen((v) => !v)} open={isMobileMenuOpen}>
             <span />
             <span />
             <span />
           </Toggle>
-          <Nav open={isMobileMenuOpen}>
+          <Nav id="primary-navigation" aria-label="Main navigation" open={isMobileMenuOpen}>
             {SECTIONS.map((id) => (
-              <NavLink key={id} active={activeSection === id} onClick={() => handleNavClick(id)}>
+              <NavLink key={id} href={`#${id}`} active={activeSection === id} aria-current={activeSection === id ? 'location' : undefined} onClick={() => handleNavClick(id)}>
                 {LABELS[id]}
               </NavLink>
             ))}
@@ -74,7 +66,7 @@ function Header() {
         <IslandWrap>
           <Island>
             {SECTIONS.map((id) => (
-              <IslandItem key={id} active={activeSection === id} onClick={() => handleNavClick(id)}>
+              <IslandItem key={id} href={`#${id}`} active={activeSection === id} aria-current={activeSection === id ? 'location' : undefined} onClick={() => handleNavClick(id)}>
                 {LABELS[id]}
               </IslandItem>
             ))}
@@ -127,7 +119,8 @@ const Bar = styled.div`
   }
 `;
 
-const Logo = styled.button`
+const Logo = styled.a`
+  text-decoration: none;
   font-family: ${({ theme }) => theme.font.display};
   font-size: 24px;
   font-weight: 600;
@@ -195,7 +188,8 @@ const Nav = styled.nav`
   }
 `;
 
-const NavLink = styled.button`
+const NavLink = styled.a`
+  text-decoration: none;
   font-family: ${({ theme }) => theme.font.body};
   font-size: 15px;
   color: ${({ active, theme }) => (active ? theme.color.ink : theme.color.muted)};
@@ -250,7 +244,8 @@ const Island = styled.div`
   animation: ${fadeDown} 0.45s ease forwards;
 `;
 
-const IslandItem = styled.button`
+const IslandItem = styled.a`
+  text-decoration: none;
   font-family: ${({ theme }) => theme.font.body};
   font-size: 13.5px;
   color: ${({ active, theme }) => (active ? theme.color.bg : theme.color.muted)};

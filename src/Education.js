@@ -87,7 +87,7 @@ function Education() {
 
                 <HsRow>
                     <HsButton onClick={() => setHsOpen((v) => !v)} aria-expanded={hsOpen}>
-                        <HsName $open={hsOpen}>Before UMD — Randolph High School</HsName>
+                        <HsName $open={hsOpen}>Randolph High School</HsName>
                         <HsDate>class of 2023</HsDate>
                         <Plus $open={hsOpen} aria-hidden>+</Plus>
                     </HsButton>
