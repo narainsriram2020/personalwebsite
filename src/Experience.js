@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import SectionHeading from './SectionHeading';
 
 // Company logos
+import modernaLogo from './experienceimages/modernalogo.png';
 import bnyLogo from './experienceimages/bny.png';
 import humanaLogo from './experienceimages/humana.png';
 import umdLogo from './experienceimages/umdcs.jpg';
@@ -16,14 +17,29 @@ import ciscoLogo from './experienceimages/cisco.svg';
 
 const experiences = [
   {
+    company: 'Moderna',
+    logo: modernaLogo,
+    title: 'Automation Engineering Co-Op',
+    date: 'Aug 2026 — Present',
+    points: [
+      'Building a centralized web application for batch record review, replacing a fragmented workflow across multiple disparate applications with a target of cutting batch manufacture-to-shipment time from 14 days to 3–4 days.',
+      'Developing automated exception detection by integrating QRM and other floor systems to flag deviations in real time, eliminating the need to manually cross-check multiple applications during batch review.',
+      "Building JavaScript data flow nodes within Moderna’s Operational Data Hub, utilizing tools like Node-RED, FlowFuse, and Rhize to orchestrate data pipelines feeding the centralized review application.",
+    ],
+    tech: ['JavaScript', 'Node-RED', 'FlowFuse', 'Rhize'],
+  },
+  {
     company: 'BNY',
     logo: bnyLogo,
     title: 'Software Engineering Intern',
-    date: 'Jun 2026 — Present',
+    date: 'Jun 2026 — Aug 2026',
     points: [
-      "Software Engineering Intern in BNY's Summer 2026 program.",
+      'Architected an AI operations assistant for enterprise middleware monitoring 150M+ messages/day, integrating an LLM into a 29-tool agentic framework; shipped to an internal container platform via GitLab CI/CD with 72 unit tests.',
+      'Re-architected authentication from a Windows SSO-cookie flow to OAuth2 client-credentials with automated in-process token refresh every 30 minutes, unblocking containerized deployment.',
+      'Built an automated pipeline with headless Edge and Python SMTP for 3x daily PDF reports and SLA alerts.',
+      'Reduced time-to-diagnosis by 10x within the ops team, saving an estimated 5,000+ engineer-hours/year by replacing manual dashboard navigation with a single natural-language query across SLA, failure, and recon data.',
     ],
-    tech: [],
+    tech: ['Python', 'LLMs', 'OAuth2', 'GitLab CI/CD', 'SMTP'],
   },
   {
     company: 'Humana',

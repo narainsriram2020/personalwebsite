@@ -435,7 +435,6 @@ function Tennis() {
 
   return (
     <Layer ref={wrapRef} $on={on}>
-      <Hint $on={on}>cursor returns the ball &nbsp;·&nbsp; click to serve</Hint>
     </Layer>
   );
 }
@@ -449,23 +448,6 @@ const Layer = styled.div`
   transition: opacity 1s ease;
 
   canvas { display: block; width: 100%; height: 100%; }
-`;
-
-const Hint = styled.div`
-  position: absolute;
-  right: 28px;
-  bottom: 26px;
-  font-family: ${({ theme }) => theme.font.mono};
-  font-size: 12px;
-  letter-spacing: 0.03em;
-  color: ${({ theme }) => theme.color.muted};
-  background: ${({ theme }) => theme.color.bgElevated}cc;
-  backdrop-filter: blur(8px);
-  border: 1px solid ${({ theme }) => theme.color.line};
-  border-radius: 999px;
-  padding: 9px 16px;
-  opacity: ${({ $on }) => ($on ? 1 : 0)};
-  transition: opacity 0.9s ease 0.6s;
 `;
 
 export default Tennis;

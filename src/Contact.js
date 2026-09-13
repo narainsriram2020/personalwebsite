@@ -42,8 +42,8 @@ const Contact = () => {
           </Kicker>
 
           <Big>
-            Whether it's an internship, a research idea, or a pickup tennis
-            match — my inbox is open.
+            Have a project, opportunity, or idea worth discussing? I'd be glad
+            to hear from you.
           </Big>
 
           <EmailRow>
